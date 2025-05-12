@@ -12,7 +12,7 @@ namespace DataAccessLayer
 {
     public static class AuthDAL
     {
-        public static async Task<User> GetUser(string name)
+        public static async Task<User> GetUser(string username)
         {
             using (var connection = await DatabaseConnector.ConnectAsync())
             {
@@ -20,11 +20,11 @@ namespace DataAccessLayer
 
                 try
                 {
-                    string query = "SELECT Name, Pass, Role FROM User WHERE Name = @Name";
+                    string query = "SELECT Username, Password, Role FROM Users WHERE Username = @Username";
                     using (var command = new SQLiteCommand(query, connection))
                     {
                         // Thêm tham số
-                        command.Parameters.AddWithValue("@Name", name);
+                        command.Parameters.AddWithValue("@Username", username);
 
                         // Sử dụng ExecuteReaderAsync thay vì Task.Run
                         using (var reader = await command.ExecuteReaderAsync())
@@ -33,8 +33,8 @@ namespace DataAccessLayer
                             if (reader.Read())
                             {
                                 return new User(
-                                    reader["Name"].ToString(),
-                                    reader["Pass"].ToString(),
+                                    reader["Username"].ToString(),
+                                    reader["Password"].ToString(),
                                     reader["Role"].ToString()
                                 );
                             }

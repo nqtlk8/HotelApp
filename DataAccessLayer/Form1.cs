@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,19 +22,27 @@ namespace DataAccessLayer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            LoadUserAsync();
+            InsertUser();
         }
-        private async void LoadUserAsync()
+        private async void InsertUser()
         {
-            User user = await AuthDAL.GetUser("admin");
-
-            if (user != null)
+            string insertQuery = "INSERT INTO Users (Username, Password, Role) VALUES (@Username, @Password, @Role)";
+            var parameters = new SQLiteParameter[]
             {
-                MessageBox.Show($"Username: {user.Username}, FullName: {user.Password}");
+    new SQLiteParameter("@Username", "john_doe"),
+    new SQLiteParameter("@Password", "123456"),
+    new SQLiteParameter("@Role", "Receptionist")
+            };
+
+            int result = await UpdateDatabase.Query(insertQuery, parameters);
+
+            if (result > 0)
+            {
+                MessageBox.Show("✅ Thêm user thành công!");
             }
             else
             {
-                MessageBox.Show("User not found");
+                MessageBox.Show("❌ Không thể thêm user.");
             }
         }
     }
