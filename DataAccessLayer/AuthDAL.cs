@@ -1,32 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Entities;
 
 namespace DataAccessLayer
 {
-    public class AuthDAL
+    public static class AuthDAL
     {
-        public static User GetUser(string username)
+        public static async Task<User> GetUser(string name)
         {
-            using (SqlConnection conn = new SqlConnection("your_connection_string"))
+            using (var connection = await DatabaseConnector.ConnectAsync())
             {
-                string query = "SELECT * FROM Users WHERE Username = @Username";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Username", username);
-                conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                if (connection == null) return null;
+
+                try
                 {
-                    return new User
+                    string query = "SELECT Name, Pass, Role FROM User WHERE Name = @Name";
+                    using (var command = new SQLiteCommand(query, connection))
                     {
-                        Username = reader["Username"].ToString(),
-                        Password = reader["Password"].ToString()
-                    };
+                        // Thêm tham số
+                        command.Parameters.AddWithValue("@Name", name);
+
+                        // Sử dụng ExecuteReaderAsync thay vì Task.Run
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            // Kiểm tra nếu có dữ liệu
+                            if (reader.Read())
+                            {
+                                return new User(
+                                    reader["Name"].ToString(),
+                                    reader["Pass"].ToString(),
+                                    reader["Role"].ToString()
+                                );
+                            }
+                        }
+                    }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("❌ Lỗi khi lấy người dùng: " + ex.Message);
+                }
+                finally
+                {
+                    DatabaseConnector.Close(connection);
+                }
+
                 return null;
             }
         }

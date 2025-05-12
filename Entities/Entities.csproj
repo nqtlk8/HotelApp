@@ -64,7 +64,6 @@
     <Compile Include="ServiceInvoice.cs" />
     <Compile Include="HistoryServicePrice.cs" />
     <Compile Include="StayPeriod.cs" />
-    <Compile Include="Testsss.cs" />
     <Compile Include="User.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

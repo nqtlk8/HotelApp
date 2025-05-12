@@ -18,7 +18,7 @@ namespace PresentationLayer
             InitializeComponent();
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private async void btnLogin_Click(object sender, EventArgs e)
         {
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
@@ -29,7 +29,9 @@ namespace PresentationLayer
                 return;
             }
 
-            if (AuthBLL.Login(username, password))
+            bool isAuthenticated = await AuthBLL.Login(username, password);
+
+            if (isAuthenticated)
             {
                 MessageBox.Show("Đăng nhập thành công");
                 // mở form chính

@@ -16,5 +16,19 @@ namespace BusinessLogicLayer
         {
             InitializeComponent();
         }
+
+        private async void Form1_Load(object sender, EventArgs e)
+        {
+            bool Is = await AuthBLL.Login("admin", "123456");
+            if (Is)
+            {
+                MessageBox.Show("Đăng nhập thành công");
+            }
+            else
+            {
+                MessageBox.Show("Tài khoản hoặc mật khẩu không đúng");
+
+            }
+        }
     }
 }

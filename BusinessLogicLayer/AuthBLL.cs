@@ -11,9 +11,9 @@ namespace BusinessLogicLayer
 {
     public class AuthBLL
     {
-        public static bool Login(string username, string password)
+        public async static Task<bool> Login(string username, string password)
         {
-            var user = AuthDAL.GetUser(username);
+            var user = await AuthDAL.GetUser(username);
             if (user == null) return false;
 
             // So sánh mật khẩu (ở đây là plain text, thực tế nên hash)
