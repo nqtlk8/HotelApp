@@ -8,26 +8,39 @@ namespace Entities
 {
     public class Booking
     {
-        public string BookingID { get; set; }
-        public string GuestID { get; set; }
+        public int BookingID { get; set; }
+        public int GuestID { get; set; }
+        public string FullName { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
         public decimal TotalPrice { get; set; }
-        public Booking(string guestID, DateTime checkInDate, DateTime checkOutDate, decimal totalPrice)
+        public Booking(int guestID, string fullname,DateTime checkInDate, DateTime checkOutDate, decimal totalPrice)
         {
             GuestID = guestID;
+            FullName = fullname;
             CheckInDate = checkInDate;
             CheckOutDate = checkOutDate;
             TotalPrice = totalPrice;
         }
+        public Booking(int bookingid, int guestID, string fullname, DateTime checkInDate, DateTime checkOutDate, decimal totalPrice)
+        {
+            BookingID = bookingid;
+            GuestID = guestID;
+            FullName = fullname;
+            CheckInDate = checkInDate;
+            CheckOutDate = checkOutDate;
+            TotalPrice = totalPrice;
+        }
+
         public override bool Equals(object obj)
         {
             return obj is Booking booking &&
                    BookingID == booking.BookingID;
         }
+
         public override int GetHashCode()
         {
-            return -2085779058 + EqualityComparer<string>.Default.GetHashCode(BookingID);
+            return 1292660469 + BookingID.GetHashCode();
         }
     }
 }

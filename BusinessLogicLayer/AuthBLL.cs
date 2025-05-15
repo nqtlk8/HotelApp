@@ -13,7 +13,7 @@ namespace BusinessLogicLayer
     {
         public async static Task<bool> Login(string username, string password)
         {
-            var user = await AuthDAL.GetUser(username);
+            User user = await AuthDAL.GetUser(username);
             if (user == null) return false;
 
             // So sánh mật khẩu (ở đây là plain text, thực tế nên hash)

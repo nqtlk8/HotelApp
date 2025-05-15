@@ -74,6 +74,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GetBookingByDateDAL.cs" />
+    <Compile Include="GetGuestDAL.cs" />
+    <Compile Include="GetRoomInfoDAL.cs" />
+    <Compile Include="GetRoomTypeDAL.cs" />
     <Compile Include="UpdateDatabase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -23,3 +23,4 @@ C:\Users\Pc\source\repos\HotelApp\BusinessLogicLayer\bin\Debug\System.Data.SQLit
 C:\Users\Pc\source\repos\HotelApp\BusinessLogicLayer\bin\Debug\System.Data.SQLite.Linq.dll
 C:\Users\Pc\source\repos\HotelApp\BusinessLogicLayer\bin\Debug\EntityFramework.xml
 C:\Users\Pc\source\repos\HotelApp\BusinessLogicLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Pc\source\repos\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.RoomCard.resources

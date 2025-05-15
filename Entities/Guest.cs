@@ -8,15 +8,23 @@ namespace Entities
 {
     public class Guest
     {
-        public string GuestID { get; set; }
-        public string Name { get; set; }
+        public int GuestID { get; set; }
+        public string FullName { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string GuestPrivateInfo { get; set; }
 
-        public Guest(string name, string phoneNumber, string email, string guestPrivateInfo)
+        public Guest(string fullname, string phoneNumber, string email, string guestPrivateInfo)
         {
-            Name = name;
+            FullName = fullname;
+            PhoneNumber = phoneNumber;
+            Email = email;
+            GuestPrivateInfo = guestPrivateInfo;
+        }
+        public Guest(int guestid, string fullname, string phoneNumber, string email, string guestPrivateInfo)
+        {
+            GuestID = guestid;
+            FullName = fullname;
             PhoneNumber = phoneNumber;
             Email = email;
             GuestPrivateInfo = guestPrivateInfo;
@@ -30,7 +38,7 @@ namespace Entities
 
         public override int GetHashCode()
         {
-            return -2085779058 + EqualityComparer<string>.Default.GetHashCode(GuestID);
+            return -2085779058 + GuestID.GetHashCode();
         }
     }
 }

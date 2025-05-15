@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogicLayer;
-
+using PresentationLayer.Receptionist;
 namespace PresentationLayer
 {
     public partial class LoginForm : Form
@@ -34,7 +34,8 @@ namespace PresentationLayer
             if (isAuthenticated)
             {
                 MessageBox.Show("Đăng nhập thành công");
-                // mở form chính
+                this.DialogResult = DialogResult.OK;
+                this.Close(); // đóng form đăng nhập
             }
             else
             {

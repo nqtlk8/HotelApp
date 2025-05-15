@@ -26,3 +26,5 @@ C:\Users\Pc\source\repos\HotelApp\PresentationLayer\bin\Debug\System.Data.SQLite
 C:\Users\Pc\source\repos\HotelApp\PresentationLayer\bin\Debug\System.Data.SQLite.Linq.dll
 C:\Users\Pc\source\repos\HotelApp\PresentationLayer\bin\Debug\EntityFramework.xml
 C:\Users\Pc\source\repos\HotelApp\PresentationLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Pc\source\repos\HotelApp\PresentationLayer\obj\Debug\PresentationLayer.Receptionist.ReceptionistMainForm.resources
+C:\Users\Pc\source\repos\HotelApp\PresentationLayer\obj\Debug\PresentationLayer.Receptionist.BookingForm.resources
