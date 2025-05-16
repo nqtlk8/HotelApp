@@ -4,12 +4,11 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataAccessLayer;
 using Entities;
 
-namespace BusinessLogicLayer
+namespace DataAccessLayer
 {
-    public static class AddBookingBLL
+    public static class AddBookingDAL
     {
         public async static Task<int> AddBooking(Booking booking, List<int> roomIds)
         {

@@ -65,7 +65,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddBookingBLL.cs" />
     <Compile Include="AuthBLL.cs" />
     <Compile Include="FilterRoomTypeBLL.cs" />
     <Compile Include="Form1.cs">

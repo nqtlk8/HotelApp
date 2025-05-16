@@ -62,7 +62,7 @@ namespace PresentationLayer.Receptionist
         private async void btnConfirm_Click(object sender, EventArgs e)
         {
             Booking booking = new Booking(GuestID, FullName, CheckinTime, CheckoutTime, 10);
-            int addbooking = await BusinessLogicLayer.AddBookingBLL.AddBooking(booking, RoomIDs);
+            int addbooking = await DataAccessLayer.AddBookingDAL.AddBooking(booking, RoomIDs);
             if (addbooking > 0)
             {
                 MessageBox.Show("✅ Đặt phòng thành công!");
