@@ -15,6 +15,15 @@ CREATE TABLE IF NOT EXISTS BookingRoom (
     FOREIGN KEY (BookingID) REFERENCES Booking(BookingID),
     FOREIGN KEY (RoomID) REFERENCES RoomInfo(RoomID)
 );
+CREATE TABLE IF NOT EXISTS BookingService (
+    BookingServiceID INTEGER PRIMARY KEY AUTOINCREMENT,
+    BookingID INTEGER,
+    ServiceID INTEGER,
+    Quantity INTEGER,
+    UsedDate TEXT,
+    FOREIGN KEY (BookingID) REFERENCES Booking(BookingID),
+    FOREIGN KEY (ServiceID) REFERENCES ServiceInfo(ServiceID)
+);
 CREATE TABLE IF NOT EXISTS Guest (
     GuestID INTEGER PRIMARY KEY AUTOINCREMENT,
     FullName TEXT NOT NULL,
@@ -22,18 +31,41 @@ CREATE TABLE IF NOT EXISTS Guest (
     Email TEXT,
     GuestPrivateInf TEXT
 );
+CREATE TABLE IF NOT EXISTS Invoice (
+    InvoiceID INTEGER PRIMARY KEY AUTOINCREMENT,
+    BookingID INTEGER NOT NULL,
+    InvoiceDate TEXT NOT NULL,         -- SQLite không có kiểu DATETIME, dùng TEXT (ISO 8601) hoặc INTEGER (Unix time)
+    RoomTotal REAL NOT NULL,
+    ServiceTotal REAL NOT NULL,
+    VAT REAL NOT NULL,
+    Surcharge REAL NOT NULL,
+    TotalPayment REAL NOT NULL,
+
+    FOREIGN KEY (BookingID) REFERENCES Booking(BookingID)
+);
+CREATE TABLE IF NOT EXISTS InvoiceRoomDetail (
+    InvoiceRoomDetailID INTEGER PRIMARY KEY AUTOINCREMENT,
+    InvoiceID INTEGER,
+    RoomID INTEGER,
+    RoomPrice REAL,
+    Nights INTEGER,
+    FOREIGN KEY (InvoiceID) REFERENCES Invoice(InvoiceID),
+    FOREIGN KEY (RoomID) REFERENCES RoomInfo(RoomID)
+);
+CREATE TABLE IF NOT EXISTS InvoiceServiceDetail (
+    InvoiceServiceDetailID INTEGER PRIMARY KEY AUTOINCREMENT,
+    InvoiceID INTEGER,
+    ServiceID INTEGER,
+    ServicePrice REAL,
+    Quantity INTEGER,
+    FOREIGN KEY (InvoiceID) REFERENCES Invoice(InvoiceID),
+    FOREIGN KEY (ServiceID) REFERENCES ServiceInfo(ServiceID)
+);
 CREATE TABLE IF NOT EXISTS RoomInfo (
     RoomID INTEGER PRIMARY KEY AUTOINCREMENT,
     RoomType TEXT NOT NULL,
     Capacity INTEGER,
     Description TEXT
-);
-CREATE TABLE IF NOT EXISTS RoomInvoice (
-    RoomInvoiceID INTEGER PRIMARY KEY AUTOINCREMENT,
-    BookingID INTEGER,
-    RoomPriceTotal REAL,
-    Datetime TEXT,
-    FOREIGN KEY (BookingID) REFERENCES Booking(BookingID)
 );
 CREATE TABLE IF NOT EXISTS RoomPrice (
     PriceID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -47,17 +79,6 @@ CREATE TABLE IF NOT EXISTS ServiceInfo (
     ServiceID INTEGER PRIMARY KEY AUTOINCREMENT,
     ServiceName TEXT,
     Descrip TEXT
-);
-CREATE TABLE IF NOT EXISTS ServiceInvoice (
-    ServiceInvoiceID INTEGER PRIMARY KEY AUTOINCREMENT,
-    ServicePrice REAL,
-    Service INTEGER,
-    Datetime TEXT,
-    GuestID INTEGER,
-    BookingID INTEGER,
-    FOREIGN KEY (Service) REFERENCES ServiceInfo(ServiceID),
-    FOREIGN KEY (GuestID) REFERENCES Guest(GuestID),
-    FOREIGN KEY (BookingID) REFERENCES Booking(BookingID)
 );
 CREATE TABLE IF NOT EXISTS ServicePrice (
     ServicePriceID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -133,5 +154,6 @@ INSERT INTO "RoomPrice" ("PriceID","RoomID","Price","StartDate","EndDate") VALUE
  (9,4,850.0,'2025-01-01','2025-12-31'),
  (10,5,1200.0,'2025-01-01','2025-12-31');
 INSERT INTO "Users" ("Username","Password","Role") VALUES ('admin','123456','admin'),
- ('reception1','rec123','Receptionist');
+ ('reception1','rec123','Receptionist'),
+ ('john_doe','123456','Receptionist');
 COMMIT;

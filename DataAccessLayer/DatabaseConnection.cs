@@ -11,7 +11,7 @@ namespace DataAccessLayer
 {
     public static class DatabaseConnector
     {
-        private static readonly string _dbPath = @"C:\Users\Pc\source\repos\HotelApp\Database\database.db";
+        private static readonly string _dbPath = @"C:\Users\PC-ACER\HotelApp\Database\database.db";
 
         public static async Task<SQLiteConnection> ConnectAsync()
         {

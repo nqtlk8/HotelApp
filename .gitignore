@@ -17,7 +17,6 @@ obj/
 *.pdb
 *.cache
 *.log
-*.db
 
 # Packages folder (if any)
 packages/
