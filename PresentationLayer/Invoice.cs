@@ -11,7 +11,7 @@ namespace PresentationLayer
     {
         private int invoiceID;  // Biến lưu ID hóa đơn đang xem
         public int bookingID;
-
+        private string guestName;
         // Khai báo DataGridView
        // private DataGridView dataGridView1;
 
@@ -19,7 +19,7 @@ namespace PresentationLayer
         private Label lblTotalText, lblTotal;
         private Label lblVATText, lblVAT;
         private Label lblLateFeeText, lblLateFee;
-        private Label lblFinalTotalText, lblFinalTotal;
+        private Label lblFinalTotalText;
         private Label lblAmountInWordsText, lblAmountInWords;
 
         // Label hiển thị tên lễ tân và khách hàng
@@ -33,7 +33,7 @@ namespace PresentationLayer
        // private Label lblName, lblEmail, lblSDT, lblCCCD;
         //private Label lblBookingID, lblCheckIn, lblCheckOut, lblCount;
 
-        private Label lblRoomTotal, lblServiceTotal, lblSurcharge, lblTotalPayment;
+        private Label  lblSurcharge, lblTotalPayment;
 
         /*
         // Các label info khách hàng - booking (giữ nguyên bạn tự thêm tương ứng)
@@ -49,13 +49,14 @@ namespace PresentationLayer
         public Invoice(int selectedInvoiceId)
         {
             InitializeComponent();     // Bắt buộc gọi đầu tiên, để tạo các control
+
             invoiceID = selectedInvoiceId;  // Gán biến cần dùng
+
+            DisplayInfo();             // Hiển thị các thông tin cơ bản (nên chắc chắn control đã sẵn sàng)
 
             InitializeControls();      // Khởi tạo các control tùy chỉnh (nếu có)
 
             AddColumnsToGrid();        // Thêm cột cho DataGridView hoặc tương tự
-
-            DisplayInfo();             // Hiển thị các thông tin cơ bản (nên chắc chắn control đã sẵn sàng)
 
             LoadData();                // Load dữ liệu chung (ví dụ các danh sách, dữ liệu phụ)
 
@@ -71,6 +72,7 @@ namespace PresentationLayer
             try
             {
                 var guest = await GuestBLL.GetGuestByInvoiceIDAsync(invoiceID);
+                
                 if (guest != null)
                 {
                     lblName.Text = "Tên khách: " + guest.FullName;
@@ -90,7 +92,6 @@ namespace PresentationLayer
                     lblBookingID.Text = "Booking ID: " + booking.BookingID;
                     lblCheckIn.Text = "Ngày nhận phòng: " + booking.CheckInDate.ToShortDateString();
                     lblCheckOut.Text = "Ngày trả phòng: " + booking.CheckOutDate.ToShortDateString();
-
                     int nights = (booking.CheckOutDate - booking.CheckInDate).Days;
                     lblCount.Text = "Số đêm: " + nights;
                 }
@@ -106,7 +107,7 @@ namespace PresentationLayer
         }
 
 
-        private void InitializeControls()
+        private async void InitializeControls()
         {
             // Khởi tạo DataGridView
             dataGridView1 = new DataGridView()
@@ -137,7 +138,7 @@ namespace PresentationLayer
             };
             lblTotal = new Label()
             {
-                Location = new Point(leftX + 150, startY),
+                Location = new Point(leftX + 250, startY),
                 Size = new Size(150, 25),
                 TextAlign = ContentAlignment.MiddleRight,
                 Font = new Font("Arial", 10),
@@ -153,7 +154,7 @@ namespace PresentationLayer
             };
             lblVAT = new Label()
             {
-                Location = new Point(leftX + 150, startY + gapY),
+                Location = new Point(leftX + 250, startY + gapY),
                 Size = new Size(150, 25),
                 TextAlign = ContentAlignment.MiddleRight,
                 Font = new Font("Arial", 10),
@@ -167,12 +168,12 @@ namespace PresentationLayer
                 Font = new Font("Arial", 10, FontStyle.Bold),
                 TextAlign = ContentAlignment.MiddleLeft
             };
-            lblLateFee = new Label()
+            lblSurcharge = new Label()
             {
-                Location = new Point(leftX + 150, startY + gapY * 2),
+                Location = new Point(leftX + 250, startY + gapY*2),
                 Size = new Size(150, 25),
                 TextAlign = ContentAlignment.MiddleRight,
-                Font = new Font("Arial", 10),
+                Font = new Font("Arial", 10)
             };
 
             lblFinalTotalText = new Label()
@@ -183,17 +184,18 @@ namespace PresentationLayer
                 Font = new Font("Arial", 10, FontStyle.Bold),
                 TextAlign = ContentAlignment.MiddleLeft
             };
-            lblFinalTotal = new Label()
+            lblTotalPayment = new Label()
             {
-                Location = new Point(leftX + 150, startY + gapY * 3),
+                Location = new Point(leftX +250 , startY + gapY * 3),
                 Size = new Size(150, 25),
+              
                 TextAlign = ContentAlignment.MiddleRight,
                 Font = new Font("Arial", 10),
             };
-
+            /*
             lblAmountInWordsText = new Label()
             {
-                Location = new Point(20, lblFinalTotal.Bottom + 15),
+                Location = new Point(20, lblTotalPayment.Bottom + 15),
                 Size = new Size(150, 25),
                 Text = "Số tiền bằng chữ:",
                 Font = new Font("Arial", 10, FontStyle.Bold),
@@ -201,47 +203,51 @@ namespace PresentationLayer
             };
             lblAmountInWords = new Label()
             {
-                Location = new Point(180, lblFinalTotal.Bottom + 15),
+                Location = new Point(180, lblTotalPayment.Bottom + 15),
                 Size = new Size(440, 25),
                 TextAlign = ContentAlignment.MiddleLeft,
                 Font = new Font("Arial", 10, FontStyle.Italic),
                 AutoEllipsis = true,
             };
-
+            */
+            
             lblUser = new Label()
             {
-                Location = new Point(20, lblAmountInWords.Bottom + 20),
+                Location = new Point(70, lblTotalPayment.Bottom + 20),
                 Size = new Size(150, 25),
                 Text = "Lễ tân:",
                 Font = new Font("Arial", 10),
                 TextAlign = ContentAlignment.MiddleLeft
             };
+            /*
             lblUserName = new Label()
             {
-                Location = new Point(80, lblAmountInWords.Bottom + 20),
+                Location = new Point(80, lblUser.Bottom + 20),
                 Size = new Size(200, 25),
-                Text = "lê mai trang",
+                Text = guestName,
                 TextAlign = ContentAlignment.MiddleLeft,
                 Font = new Font("Arial", 10),
             };
-
+            */
             lblGuest = new Label()
             {
-                Location = new Point(350, lblAmountInWords.Bottom + 20),
+                Location = new Point(230, lblTotalPayment.Bottom + 20),
                 Size = new Size(150, 25),
                 Text = "Khách hàng:",
                 Font = new Font("Arial", 10),
                 TextAlign = ContentAlignment.MiddleRight
             };
+            var guest = await GuestBLL.GetGuestByInvoiceIDAsync(invoiceID);
             lblGuestName = new Label()
             {
-                Location = new Point(460, lblAmountInWords.Bottom + 20),
+
+                Location = new Point(220, lblTotalPayment.Bottom + 90),
                 Size = new Size(150, 25),
-                Text = "lê mai trang",
+                Text = guest.FullName,
                 TextAlign = ContentAlignment.MiddleRight,
                 Font = new Font("Arial", 10),
             };
-
+            
             Controls.Add(lblTotalText);
             Controls.Add(lblTotal);
             Controls.Add(lblVATText);
@@ -249,14 +255,14 @@ namespace PresentationLayer
             Controls.Add(lblLateFeeText);
             Controls.Add(lblLateFee);
             Controls.Add(lblFinalTotalText);
-            Controls.Add(lblFinalTotal);
+            Controls.Add(lblTotalPayment);
             Controls.Add(lblAmountInWordsText);
             Controls.Add(lblAmountInWords);
             Controls.Add(lblUser);
             Controls.Add(lblUserName);
             Controls.Add(lblGuest);
             Controls.Add(lblGuestName);
-
+            Controls.Add(lblSurcharge);
             leftX = 20;
             int topY = 20;
             gapY = 30;
@@ -278,7 +284,7 @@ namespace PresentationLayer
                 TextAlign = ContentAlignment.MiddleLeft,
                 Font = new Font("Arial", 10)
             };
-
+           
             // Label Ngày hóa đơn
             lblInvoiceDateText = new Label()
             {
@@ -295,7 +301,6 @@ namespace PresentationLayer
                 TextAlign = ContentAlignment.MiddleLeft,
                 Font = new Font("Arial", 10)
             };
-
             // Thêm vào Controls
             Controls.Add(lblInvoiceIDText);
             Controls.Add(lblInvoiceID);
@@ -347,27 +352,13 @@ namespace PresentationLayer
 
             // Nếu đến đây, chắc chắn invoice != null
             lblInvoiceID.Text = invoice.InvoiceID.ToString();
-            lblBookingID.Text = invoice.BookingID.ToString();
             lblInvoiceDate.Text = invoice.InvoiceDate.ToString("dd/MM/yyyy");
-            lblRoomTotal.Text = (invoice.RoomTotal.ToString("N0") ?? "0") + " VNĐ";
-            lblServiceTotal.Text = invoice.ServiceTotal.ToString("N0") + " VNĐ";
+            lblTotal.Text = (invoice.RoomTotal + invoice.ServiceTotal.ToString("N0") ?? "0") +" VNĐ";
             lblVAT.Text = invoice.VAT.ToString("N0") + " VNĐ";
             lblSurcharge.Text = invoice.Surcharge.ToString("N0") + " VNĐ";
             lblTotalPayment.Text = invoice.TotalPayment.ToString("N0") + " VNĐ";
 
-            /*
-            // Ví dụ hiển thị lên các label đã tạo sẵn trên form
-            lblInvoiceID.Text = invoice.InvoiceID.ToString();
-            lblBookingID.Text = invoice.BookingID.ToString();
-            lblInvoiceDate.Text = invoice.InvoiceDate.ToString("dd/MM/yyyy");
-            lblRoomTotal.Text = (invoice.RoomTotal?.ToString() ?? "0") + " VNĐ";
-
-            //lblRoomTotal.Text = invoice.RoomTotal.ToString("N0") + " VNĐ";
-            lblServiceTotal.Text = invoice.ServiceTotal.ToString("N0") + " VNĐ";
-            lblVAT.Text = invoice.VAT.ToString("N0") + " VNĐ";
-            lblSurcharge.Text = invoice.Surcharge.ToString("N0") + " VNĐ";
-            lblTotalPayment.Text = invoice.TotalPayment.ToString("N0") + " VNĐ";
-            */
+           
         }
 
         // Hàm chuyển số thành chữ tiếng Việt (bạn có thể dùng hàm hiện có hoặc viết mới)

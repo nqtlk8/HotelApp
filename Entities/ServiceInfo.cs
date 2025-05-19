@@ -12,7 +12,6 @@ namespace Entities
         public string ServiceName { get; set; }
         public string Descrip { get; set; }
 
-        public ServiceInfo() { }
 
         public ServiceInfo(int serviceID, string serviceName, string descrip)
         {

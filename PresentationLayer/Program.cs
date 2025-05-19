@@ -26,6 +26,8 @@ namespace PresentationLayer
             }
             */
             Application.Run(new Invoice(30));
+            // Chạy form login trước
+            
         }
     }
 }

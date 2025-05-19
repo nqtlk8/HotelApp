@@ -1,1 +1,173 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="database.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2014"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="Booking" custom_title="0" dock_id="2" table="4,7:mainBooking"/><table title="Users" custom_title="0" dock_id="3" table="4,5:mainUsers"/><dock_state state="000000ff00000000fd00000001000000020000043c000002b6fc0100000002fb000000160064006f0063006b00420072006f007700730065003101000000000000043c0000000000000000fc000000000000043c0000011800fffffffa000000010100000002fb000000160064006f0063006b00420072006f00770073006500320100000000ffffffff0000011800fffffffb000000160064006f0063006b00420072006f00770073006500330100000000ffffffff0000011800ffffff000002580000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Booking" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="67"/><column index="2" value="56"/><column index="3" value="101"/><column index="4" value="78"/><column index="5" value="85"/><column index="6" value="85"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Users" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="70"/><column index="2" value="62"/><column index="3" value="101"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1"></sql><current_tab id="0"/></tab_sql></sqlb_project>
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="database.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2500"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="Booking" custom_title="0" dock_id="2" table="4,7:mainBooking"/><dock_state state="000000ff00000000fd0000000100000002000005f4000002b6fc0100000002fb000000160064006f0063006b00420072006f00770073006500310100000000000001610000000000000000fb000000160064006f0063006b00420072006f00770073006500320100000000000005f40000011800ffffff000002580000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Booking" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="67"/><column index="2" value="56"/><column index="3" value="101"/><column index="4" value="64"/><column index="5" value="156"/><column index="6" value="156"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Guest" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="54"/><column index="2" value="101"/><column index="3" value="87"/><column index="4" value="163"/><column index="5" value="148"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Invoice" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="63"/><column index="2" value="69"/><column index="3" value="76"/><column index="4" value="68"/><column index="5" value="77"/><column index="6" value="30"/><column index="7" value="65"/><column index="8" value="85"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">CREATE TABLE IF NOT EXISTS Invoice (
+    InvoiceID INTEGER PRIMARY KEY AUTOINCREMENT,
+    BookingID INTEGER UNIQUE,
+    InvoiceDate TEXT,
+    TotalAmount REAL,
+    FOREIGN KEY (BookingID) REFERENCES Booking(BookingID)
+);
+
+CREATE TABLE IF NOT EXISTS InvoiceRoomDetail (
+    InvoiceRoomDetailID INTEGER PRIMARY KEY AUTOINCREMENT,
+    InvoiceID INTEGER,
+    RoomID INTEGER,
+    RoomPrice REAL,
+    Nights INTEGER,
+    FOREIGN KEY (InvoiceID) REFERENCES Invoice(InvoiceID),
+    FOREIGN KEY (RoomID) REFERENCES RoomInfo(RoomID)
+);
+
+CREATE TABLE IF NOT EXISTS InvoiceServiceDetail (
+    InvoiceServiceDetailID INTEGER PRIMARY KEY AUTOINCREMENT,
+    InvoiceID INTEGER,
+    ServiceID INTEGER,
+    ServicePrice REAL,
+    Quantity INTEGER,
+    FOREIGN KEY (InvoiceID) REFERENCES Invoice(InvoiceID),
+    FOREIGN KEY (ServiceID) REFERENCES ServiceInfo(ServiceID)
+);
+CREATE TABLE IF NOT EXISTS Invoice (
+    InvoiceID INTEGER PRIMARY KEY AUTOINCREMENT,
+    BookingID INTEGER NOT NULL,
+    InvoiceDate TEXT NOT NULL,         -- SQLite không có kiểu DATETIME, dùng TEXT (ISO 8601) hoặc INTEGER (Unix time)
+    RoomTotal REAL NOT NULL,
+    ServiceTotal REAL NOT NULL,
+    VAT REAL NOT NULL,
+    Surcharge REAL NOT NULL,
+    TotalPayment REAL NOT NULL,
+
+    FOREIGN KEY (BookingID) REFERENCES Booking(BookingID)
+);
+CREATE TABLE IF NOT EXISTS BookingService (
+    BookingServiceID INTEGER PRIMARY KEY AUTOINCREMENT,
+    BookingID INTEGER,
+    ServiceID INTEGER,
+    Quantity INTEGER,
+    UsedDate TEXT,
+    FOREIGN KEY (BookingID) REFERENCES Booking(BookingID),
+    FOREIGN KEY (ServiceID) REFERENCES ServiceInfo(ServiceID)
+);
+BEGIN TRANSACTION;
+
+-- 1. Khách hàng
+INSERT INTO Guest (FullName, PhoneNumber, Email, GuestPrivateInf)
+VALUES ('Nguyen Van A', '0901234567', 'a.nguyen@example.com', 'CMND: 123456789');
+
+-- 2. Thông tin phòng &amp; giá phòng
+INSERT INTO RoomInfo (RoomType, Capacity, Description)
+VALUES ('Single', 1, 'Phòng đơn, giường đơn, thích hợp cho 1 người');
+
+INSERT INTO RoomPrice (RoomID, Price, StartDate, EndDate)
+VALUES (
+    (SELECT RoomID FROM RoomInfo ORDER BY RoomID DESC LIMIT 1),
+    500.0, '2025-01-01', '2025-12-31'
+);
+
+-- 3. Dịch vụ &amp; giá dịch vụ
+INSERT INTO ServiceInfo (ServiceName, Descrip)
+VALUES ('Nước suối', '1 chai nước suối miễn phí');
+
+INSERT INTO ServicePrice (ServiceID, ServicePrice, StartDate, EndDate)
+VALUES (
+    (SELECT ServiceID FROM ServiceInfo ORDER BY ServiceID DESC LIMIT 1),
+    10.0, '2025-01-01', '2025-12-31'
+);
+
+-- 4. Đặt phòng
+INSERT INTO Booking (GuestID, FullName, TotalPrice, Checkin, Checkout)
+VALUES (
+    (SELECT GuestID FROM Guest ORDER BY GuestID DESC LIMIT 1),
+    'Nguyen Van A', 600.0, '2025-05-17 14:00:00', '2025-05-18 12:00:00'
+);
+
+INSERT INTO BookingRoom (BookingID, RoomID)
+VALUES (
+    (SELECT BookingID FROM Booking ORDER BY BookingID DESC LIMIT 1),
+    (SELECT RoomID FROM RoomInfo ORDER BY RoomID DESC LIMIT 1)
+);
+
+-- 5. Hóa đơn
+INSERT INTO Invoice (BookingID, InvoiceDate, RoomTotal, ServiceTotal, VAT, Surcharge, TotalPayment)
+VALUES (
+    (SELECT BookingID FROM Booking ORDER BY BookingID DESC LIMIT 1),
+    '2025-05-17 12:00:00', 500.0, 100.0, 60.0, 0.0, 660.0
+);
+
+-- 6. Chi tiết hóa đơn: Phòng
+INSERT INTO InvoiceRoomDetail (InvoiceID, RoomID, RoomPrice, Nights)
+VALUES (
+    (SELECT InvoiceID FROM Invoice ORDER BY InvoiceID DESC LIMIT 1),
+    (SELECT RoomID FROM RoomInfo ORDER BY RoomID DESC LIMIT 1),
+    500.0, 1
+);
+
+-- 7. Chi tiết hóa đơn: Dịch vụ
+INSERT INTO InvoiceServiceDetail (InvoiceID, ServiceID, ServicePrice, Quantity)
+VALUES (
+    (SELECT InvoiceID FROM Invoice ORDER BY InvoiceID DESC LIMIT 1),
+    (SELECT ServiceID FROM ServiceInfo ORDER BY ServiceID DESC LIMIT 1),
+    10.0, 10
+);
+
+COmmit 
+select * from Invoice 
+select * from Booking
+select * from Guest
+
+BEGIN TRANSACTION;
+
+-- Thêm Guest mẫu (nếu chưa có)
+INSERT OR IGNORE INTO Guest (GuestID, FullName, PhoneNumber, Email, GuestPrivateInf) VALUES
+(30, 'Test Guest', '0909999999', 'testguest@example.com', 'Passport: T1234567');
+
+-- Thêm Booking mẫu (BookingID = 30) liên kết GuestID = 30
+INSERT OR IGNORE INTO Booking (BookingID, GuestID, FullName, TotalPrice, Checkin, Checkout) VALUES
+(30, 30, 'Test Guest', 2000.0, '2025-05-10 14:00:00', '2025-05-12 12:00:00');
+
+-- Thêm BookingRoom mẫu (2 phòng)
+INSERT OR IGNORE INTO BookingRoom (BookingRoomID, BookingID, RoomID) VALUES
+(30, 30, 1),
+(31, 30, 2);
+
+-- Thêm RoomInfo (nếu chưa có)
+INSERT OR IGNORE INTO RoomInfo (RoomID, RoomType, Capacity, Description) VALUES
+(1, 'Single', 1, 'Phòng đơn, giường đơn, thích hợp cho 1 người'),
+(2, 'Double', 2, 'Phòng đôi, có bàn làm việc và tivi');
+
+-- Thêm RoomPrice cho 2 phòng (giá 500 và 800)
+INSERT OR IGNORE INTO RoomPrice (PriceID, RoomID, Price, StartDate, EndDate) VALUES
+(30, 1, 500.0, '2025-01-01', '2025-12-31'),
+(31, 2, 800.0, '2025-01-01', '2025-12-31');
+
+-- Thêm ServiceInfo (2 dịch vụ)
+INSERT OR IGNORE INTO ServiceInfo (ServiceID, ServiceName, Descrip) VALUES
+(30, 'Dọn phòng', 'Dịch vụ dọn phòng hàng ngày'),
+(31, 'Ăn sáng', 'Dịch vụ ăn sáng buffet');
+
+-- Thêm BookingService (đã dùng dịch vụ)
+INSERT OR IGNORE INTO BookingService (BookingServiceID, BookingID, ServiceID, Quantity, UsedDate) VALUES
+(30, 30, 30, 2, '2025-05-11'),
+(31, 30, 31, 3, '2025-05-11');
+
+-- Thêm ServicePrice
+INSERT OR IGNORE INTO ServicePrice (ServicePriceID, ServiceID, ServicePrice, StartDate, EndDate) VALUES
+(30, 30, 50.0, '2025-01-01', '2025-12-31'),
+(31, 31, 100.0, '2025-01-01', '2025-12-31');
+
+-- Thêm Invoice cho BookingID 30, tổng tiền giả định
+INSERT OR IGNORE INTO Invoice (InvoiceID, BookingID, InvoiceDate, RoomTotal, ServiceTotal, VAT, Surcharge, TotalPayment) VALUES
+(30, 30, '2025-05-12', 2600.0, 350.0, 260.0, 50.0, 3260.0);
+
+-- Thêm InvoiceRoomDetail
+INSERT OR IGNORE INTO InvoiceRoomDetail (InvoiceRoomDetailID, InvoiceID, RoomID, RoomPrice, Nights) VALUES
+(30, 30, 1, 500.0, 2),
+(31, 30, 2, 800.0, 2);
+
+-- Thêm InvoiceServiceDetail
+INSERT OR IGNORE INTO InvoiceServiceDetail (InvoiceServiceDetailID, InvoiceID, ServiceID, ServicePrice, Quantity) VALUES
+(30, 30, 30, 50.0, 2),
+(31, 30, 31, 100.0, 3);
+
+COMMIT;
+SELECT * FROM InvoiceRoomDetail WHERE InvoiceID = 30;
+
+</sql><current_tab id="0"/></tab_sql></sqlb_project>

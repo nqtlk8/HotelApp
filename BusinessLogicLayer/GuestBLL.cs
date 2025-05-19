@@ -15,7 +15,5 @@ namespace BusinessLogicLayer
         {
             return await GuestDAL.GetGuestByInvoiceIDAsync(invoiceID);
         }
-
-
     }
 }
