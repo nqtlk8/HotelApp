@@ -24,7 +24,6 @@ namespace PresentationLayer
                 Application.Run(new ReceptionistMainForm());
             }
 
-
         }
     }
 }
