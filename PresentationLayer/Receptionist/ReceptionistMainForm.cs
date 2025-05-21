@@ -129,5 +129,12 @@ namespace PresentationLayer.Receptionist
 
             rooms = BusinessLogicLayer.FilterRoomTypeBLL.FilterByRoomType(rooms, selectedRoomTypes);
         }
+
+        private void btnCheckin_Click(object sender, EventArgs e)
+        {
+            CheckinForm checkinForm = new CheckinForm();
+            checkinForm.ShowDialog();
+
+        }
     }
 }
