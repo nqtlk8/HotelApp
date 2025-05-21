@@ -22,10 +22,10 @@ namespace DataAccessLayer
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            List<int> roomid = await GetBookingByDateDAL.GetBookedRoom(new DateTime(2025, 5, 12), new DateTime(2025, 5, 13));
-            foreach (var id in roomid)
+            List<Guest> listnameguse = await ListNameSearch.GetListName("Guest");
+            foreach (var name in listnameguse)
             {
-                MessageBox.Show(id.ToString());
+                MessageBox.Show(name.FullName);
             }
         }
         

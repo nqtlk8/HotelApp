@@ -87,6 +87,12 @@
     <Compile Include="Receptionist\BookingForm.Designer.cs">
       <DependentUpon>BookingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Receptionist\CheckinForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receptionist\CheckinForm.Designer.cs">
+      <DependentUpon>CheckinForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Receptionist\ReceptionistMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +117,9 @@
     </Compile>
     <EmbeddedResource Include="Receptionist\BookingForm.resx">
       <DependentUpon>BookingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receptionist\CheckinForm.resx">
+      <DependentUpon>CheckinForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Receptionist\ReceptionistMainForm.resx">
       <DependentUpon>ReceptionistMainForm.cs</DependentUpon>

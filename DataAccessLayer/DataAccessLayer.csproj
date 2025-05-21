@@ -71,6 +71,7 @@
     <Compile Include="BookingDAL.cs" />
     <Compile Include="BookingRoomDAL.cs" />
     <Compile Include="BookingServiceDAL.cs" />
+    <Compile Include="CheckinDAL.cs" />
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -79,13 +80,16 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GetBookingByDateDAL.cs" />
+    <Compile Include="GetBookingIDbyNameDAL.cs" />
     <Compile Include="GetGuestDAL.cs" />
+    <Compile Include="GetRoomIDbyBookingID.cs" />
     <Compile Include="GuestDAL.cs" />
     <Compile Include="InvoiceDAL.cs" />
     <Compile Include="InvoiceRoomDetailDAL.cs" />
     <Compile Include="GetRoomInfoDAL.cs" />
     <Compile Include="GetRoomTypeDAL.cs" />
     <Compile Include="InvoiceServiceDetailDAL.cs" />
+    <Compile Include="ListNameSearch.cs" />
     <Compile Include="RoomDAL.cs" />
     <Compile Include="RoomPriceDAL.cs" />
     <Compile Include="ServiceDAL.cs" />
