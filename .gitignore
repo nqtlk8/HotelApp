@@ -11,15 +11,8 @@ obj/
 *.userosscache
 *.sln.docstates
 
-# Others
-*.exe
-*.dll
-*.pdb
-*.cache
-*.log
 
 # Packages folder (if any)
 packages/
 
-# Cho phép giữ lại SQLite.Interop.dll
-!**/SQLite.Interop.dll
+
