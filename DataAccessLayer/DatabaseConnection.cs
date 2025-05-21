@@ -11,7 +11,9 @@ namespace DataAccessLayer
 {
     public static class DatabaseConnector
     {
-        private static readonly string _dbPath = @"C:\Users\Quynh Nhu\Downloads\database.db";
+        public static string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+        public static string projectDir = Path.GetFullPath(Path.Combine(baseDir, @"..\..\..\"));
+        public static string _dbPath = Path.Combine(projectDir, "Database", "database.db");
 
         public static async Task<SQLiteConnection> ConnectAsync()
         {

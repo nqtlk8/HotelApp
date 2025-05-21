@@ -42,7 +42,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -68,6 +70,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Invoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Invoice.Designer.cs">
+      <DependentUpon>Invoice.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +102,12 @@
     <Compile Include="Receptionist\BookingForm.Designer.cs">
       <DependentUpon>BookingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Receptionist\CheckinForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receptionist\CheckinForm.Designer.cs">
+      <DependentUpon>CheckinForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Receptionist\ReceptionistMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +115,9 @@
       <DependentUpon>ReceptionistMainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Receptionist\SelectedRoomCard.cs" />
+    <EmbeddedResource Include="Invoice.resx">
+      <DependentUpon>Invoice.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -123,6 +140,9 @@
     </Compile>
     <EmbeddedResource Include="Receptionist\BookingForm.resx">
       <DependentUpon>BookingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receptionist\CheckinForm.resx">
+      <DependentUpon>CheckinForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Receptionist\ReceptionistMainForm.resx">
       <DependentUpon>ReceptionistMainForm.cs</DependentUpon>
