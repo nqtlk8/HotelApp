@@ -11,7 +11,7 @@ obj/
 *.userosscache
 *.sln.docstates
 
-
+*.cache
 # Packages folder (if any)
 packages/
 
