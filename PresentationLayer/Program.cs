@@ -16,7 +16,7 @@ namespace PresentationLayer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            LoginForm loginForm = new LoginForm();
+            AdminForm loginForm = new AdminForm();
 
             // Chạy form login trước
             if (loginForm.ShowDialog() == DialogResult.OK)

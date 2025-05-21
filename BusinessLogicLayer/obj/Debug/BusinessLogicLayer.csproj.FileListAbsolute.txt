@@ -24,3 +24,55 @@ C:\Users\Pc\source\repos\HotelApp\BusinessLogicLayer\bin\Debug\System.Data.SQLit
 C:\Users\Pc\source\repos\HotelApp\BusinessLogicLayer\bin\Debug\EntityFramework.xml
 C:\Users\Pc\source\repos\HotelApp\BusinessLogicLayer\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Pc\source\repos\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.RoomCard.resources
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.exe.config
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.exe
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\DataAccessLayer.exe
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\Entities.exe
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\EntityFramework.dll
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\System.Data.SQLite.dll
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\DataAccessLayer.exe.config
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\Entities.pdb
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\Entities.exe.config
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\EntityFramework.xml
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\bin\Debug\System.Data.SQLite.xml
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.AssemblyReference.cache
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.Form1.resources
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.Properties.Resources.resources
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.RoomCard.resources
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.GenerateResource.cache
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\obj\Debug\Business.450209FB.Up2Date
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.exe
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.exe.config
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.exe
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\DataAccessLayer.exe
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\Entities.exe
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\EntityFramework.dll
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\System.Data.SQLite.dll
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\DataAccessLayer.exe.config
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\Entities.pdb
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\Entities.exe.config
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\EntityFramework.xml
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\HotelApp\BusinessLogicLayer\bin\Debug\System.Data.SQLite.xml
+C:\Users\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.AssemblyReference.cache
+C:\Users\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.Form1.resources
+C:\Users\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.Properties.Resources.resources
+C:\Users\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.RoomCard.resources
+C:\Users\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.GenerateResource.cache
+C:\Users\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+C:\Users\HotelApp\BusinessLogicLayer\obj\Debug\Business.450209FB.Up2Date
+C:\Users\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.exe
+C:\Users\HotelApp\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb

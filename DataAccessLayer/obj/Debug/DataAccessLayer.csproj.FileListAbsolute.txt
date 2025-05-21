@@ -20,3 +20,47 @@ C:\Users\Pc\source\repos\HotelApp\DataAccessLayer\bin\Debug\System.Data.SQLite.x
 C:\Users\Pc\source\repos\HotelApp\DataAccessLayer\obj\Debug\DataAcce.E67BD773.Up2Date
 C:\Users\Pc\source\repos\HotelApp\DataAccessLayer\obj\Debug\DataAccessLayer.exe
 C:\Users\Pc\source\repos\HotelApp\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\bin\Debug\DataAccessLayer.exe.config
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\bin\Debug\DataAccessLayer.exe
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\bin\Debug\Entities.exe
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\bin\Debug\EntityFramework.dll
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\bin\Debug\System.Data.SQLite.dll
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\bin\Debug\Entities.pdb
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\bin\Debug\Entities.exe.config
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\bin\Debug\EntityFramework.xml
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\bin\Debug\System.Data.SQLite.xml
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.AssemblyReference.cache
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\obj\Debug\DataAccessLayer.Form1.resources
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\obj\Debug\DataAccessLayer.Properties.Resources.resources
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.GenerateResource.cache
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\obj\Debug\DataAcce.E67BD773.Up2Date
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\obj\Debug\DataAccessLayer.exe
+C:\Users\Huynh Ngoc\Source\Repos\HotelApp\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+C:\Users\HotelApp\DataAccessLayer\bin\Debug\DataAccessLayer.exe.config
+C:\Users\HotelApp\DataAccessLayer\bin\Debug\DataAccessLayer.exe
+C:\Users\HotelApp\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\HotelApp\DataAccessLayer\bin\Debug\Entities.exe
+C:\Users\HotelApp\DataAccessLayer\bin\Debug\EntityFramework.dll
+C:\Users\HotelApp\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\HotelApp\DataAccessLayer\bin\Debug\System.Data.SQLite.dll
+C:\Users\HotelApp\DataAccessLayer\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\HotelApp\DataAccessLayer\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\HotelApp\DataAccessLayer\bin\Debug\Entities.pdb
+C:\Users\HotelApp\DataAccessLayer\bin\Debug\Entities.exe.config
+C:\Users\HotelApp\DataAccessLayer\bin\Debug\EntityFramework.xml
+C:\Users\HotelApp\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\HotelApp\DataAccessLayer\bin\Debug\System.Data.SQLite.xml
+C:\Users\HotelApp\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.AssemblyReference.cache
+C:\Users\HotelApp\DataAccessLayer\obj\Debug\DataAccessLayer.Form1.resources
+C:\Users\HotelApp\DataAccessLayer\obj\Debug\DataAccessLayer.Properties.Resources.resources
+C:\Users\HotelApp\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.GenerateResource.cache
+C:\Users\HotelApp\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\HotelApp\DataAccessLayer\obj\Debug\DataAcce.E67BD773.Up2Date
+C:\Users\HotelApp\DataAccessLayer\obj\Debug\DataAccessLayer.exe
+C:\Users\HotelApp\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
