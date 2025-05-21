@@ -18,12 +18,12 @@ namespace PresentationLayer
             Application.SetCompatibleTextRenderingDefault(false);
             AdminForm loginForm = new AdminForm();
 
+            // Chạy form login trước
             if (loginForm.ShowDialog() == DialogResult.OK)
             {
                 // Nếu loginForm trả về OK thì chạy MainForm
                 Application.Run(new ReceptionistMainForm());
             }
-
         }
     }
 }

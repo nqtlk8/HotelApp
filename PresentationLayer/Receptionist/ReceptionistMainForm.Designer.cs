@@ -39,7 +39,6 @@
             this.lblFrom = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.btnCheckin = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -47,7 +46,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnCheckin);
             this.panel1.Controls.Add(this.btnBooking);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -57,7 +55,7 @@
             // 
             // btnBooking
             // 
-            this.btnBooking.Location = new System.Drawing.Point(37, 266);
+            this.btnBooking.Location = new System.Drawing.Point(40, 359);
             this.btnBooking.Name = "btnBooking";
             this.btnBooking.Size = new System.Drawing.Size(113, 69);
             this.btnBooking.TabIndex = 0;
@@ -149,16 +147,6 @@
             this.dateTimePicker1.TabIndex = 0;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
-            // btnCheckin
-            // 
-            this.btnCheckin.Location = new System.Drawing.Point(37, 352);
-            this.btnCheckin.Name = "btnCheckin";
-            this.btnCheckin.Size = new System.Drawing.Size(113, 69);
-            this.btnCheckin.TabIndex = 1;
-            this.btnCheckin.Text = "Check-In";
-            this.btnCheckin.UseVisualStyleBackColor = true;
-            this.btnCheckin.Click += new System.EventHandler(this.btnCheckin_Click);
-            // 
             // ReceptionistMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -189,6 +177,5 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label lblRoomTypeSelected;
         private System.Windows.Forms.Button btnBooking;
-        private System.Windows.Forms.Button btnCheckin;
     }
 }

@@ -8,34 +8,27 @@ namespace Entities
 {
     public class StayPeriod
     {
-        public int StayPeriodID { get; set; }
-        public int BookingID { get; set; }
-        public DateTime  CheckinActual { get; set; }
-        public DateTime CheckoutActual { get; set; }
-
-        public StayPeriod(int stayPeriodID, int bookingID, int guestID, DateTime checkinActual, DateTime checkoutActual)
+        public string BookingID { get; set; }
+        public string GuestID { get; set; }
+        public StayPeriod(string BookingID, string GuestID)
         {
-            StayPeriodID = stayPeriodID;
-            BookingID = bookingID;
-            CheckinActual = checkinActual;
-            CheckoutActual = checkoutActual;
-        }
-
-        public StayPeriod(int bookingID, DateTime checkinActual)
-        {
-            BookingID = bookingID;
-            CheckinActual = checkinActual;
+            this.BookingID = BookingID;
+            this.GuestID = GuestID;
         }
 
         public override bool Equals(object obj)
         {
             return obj is StayPeriod period &&
-                   StayPeriodID == period.StayPeriodID;
+                   BookingID == period.BookingID &&
+                   GuestID == period.GuestID;
         }
 
         public override int GetHashCode()
         {
-            return -1289241516 + StayPeriodID.GetHashCode();
+            int hashCode = 601006035;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(BookingID);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(GuestID);
+            return hashCode;
         }
     }
 }

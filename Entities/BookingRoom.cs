@@ -1,36 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Entities
 {
     public class BookingRoom
     {
-        public int BookingRoomID { get; set; }
-        public int BookingID { get; set; }
-        public int RoomID { get; set; }
+        public string BookingID { get; set; }
+        public string RoomID { get; set; }
+        public DateTime Date { get; set; }
 
-        public BookingRoom(int bookingId, int roomId)
+        public BookingRoom(string bookingID, string roomID, DateTime date)
         {
-            BookingID = bookingId;
-            RoomID = roomId;
-        }
-
-        public BookingRoom(int bookingRoomId, int bookingId, int roomId)
-        {
-            BookingRoomID = bookingRoomId;
-            BookingID = bookingId;
-            RoomID = roomId;
+            BookingID = bookingID;
+            RoomID = roomID;
+            Date = date;
         }
 
         public override bool Equals(object obj)
         {
             return obj is BookingRoom room &&
-                   BookingRoomID == room.BookingRoomID;
+                   BookingID == room.BookingID;
         }
 
         public override int GetHashCode()
         {
-            return 1292660469 + BookingRoomID.GetHashCode();
+            return 1292660469 + EqualityComparer<string>.Default.GetHashCode(BookingID);
         }
     }
 }

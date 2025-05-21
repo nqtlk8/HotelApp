@@ -1,9 +1,5 @@
-﻿using DataAccessLayer;
-using Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entities;
@@ -96,12 +92,10 @@ namespace BusinessLogicLayer
                 return await GetGuestDAL.DeleteGuest(guestId);
             }
             catch (Exception ex)
-        public static async Task<Guest> GetGuestByInvoiceIDAsync(int invoiceID)
-        {
+            {
                 MessageBox.Show("❌ Error deleting guest: " + ex.Message);
                 return false;
             }
-            return await GuestDAL.GetGuestByInvoiceIDAsync(invoiceID);
         }
     }
 }

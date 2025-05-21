@@ -30,12 +30,6 @@ namespace Entities
             GuestPrivateInfo = guestPrivateInfo;
         }
 
-        public Guest(int guestID, string fullName)
-        {
-            GuestID = guestID;
-            FullName = fullName;
-        }
-
         public override bool Equals(object obj)
         {
             return obj is Guest guest &&

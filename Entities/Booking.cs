@@ -13,8 +13,8 @@ namespace Entities
         public string FullName { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
-        public Double TotalPrice { get; set; }
-        public Booking(int guestID, string fullname,DateTime checkInDate, DateTime checkOutDate, Double totalPrice)
+        public decimal TotalPrice { get; set; }
+        public Booking(int guestID, string fullname,DateTime checkInDate, DateTime checkOutDate, decimal totalPrice)
         {
             GuestID = guestID;
             FullName = fullname;
@@ -22,7 +22,7 @@ namespace Entities
             CheckOutDate = checkOutDate;
             TotalPrice = totalPrice;
         }
-        public Booking(int bookingid, int guestID, string fullname, DateTime checkInDate, DateTime checkOutDate, Double totalPrice)
+        public Booking(int bookingid, int guestID, string fullname, DateTime checkInDate, DateTime checkOutDate, decimal totalPrice)
         {
             BookingID = bookingid;
             GuestID = guestID;
