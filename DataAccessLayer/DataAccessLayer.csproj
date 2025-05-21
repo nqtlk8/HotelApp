@@ -68,6 +68,9 @@
   <ItemGroup>
     <Compile Include="AddBookingDAL.cs" />
     <Compile Include="AuthDAL.cs" />
+    <Compile Include="BookingDAL.cs" />
+    <Compile Include="BookingRoomDAL.cs" />
+    <Compile Include="BookingServiceDAL.cs" />
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -77,8 +80,16 @@
     </Compile>
     <Compile Include="GetBookingByDateDAL.cs" />
     <Compile Include="GetGuestDAL.cs" />
+    <Compile Include="GuestDAL.cs" />
+    <Compile Include="InvoiceDAL.cs" />
+    <Compile Include="InvoiceRoomDetailDAL.cs" />
     <Compile Include="GetRoomInfoDAL.cs" />
     <Compile Include="GetRoomTypeDAL.cs" />
+    <Compile Include="InvoiceServiceDetailDAL.cs" />
+    <Compile Include="RoomDAL.cs" />
+    <Compile Include="RoomPriceDAL.cs" />
+    <Compile Include="ServiceDAL.cs" />
+    <Compile Include="ServicePriceDAL.cs" />
     <Compile Include="UpdateDatabase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
