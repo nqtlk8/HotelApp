@@ -17,8 +17,13 @@ namespace PresentationLayer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             LoginForm loginForm = new LoginForm();
-            loginForm.ShowDialog();
-            
+
+            if (loginForm.ShowDialog() == DialogResult.OK)
+            {
+                // Nếu loginForm trả về OK thì chạy MainForm
+                Application.Run(new ReceptionistMainForm());
+            }
+
 
         }
     }
