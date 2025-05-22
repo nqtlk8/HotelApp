@@ -19,6 +19,7 @@ namespace PresentationLayer.Receptionist
         public List<int> RoomIDs { get; set; }
         public int GuestID { get; set; }
         public string FullName { get; set; }
+        public List<Entities.Guest> guests;
         public BookingForm()
         {
             InitializeComponent();
@@ -27,7 +28,7 @@ namespace PresentationLayer.Receptionist
 
         private async void BookingForm_Load(object sender, EventArgs e)
         {
-            List<Entities.Guest> guests = await DataAccessLayer.GetGuestDAL.GetGuests();
+            guests = await DataAccessLayer.GetGuestDAL.GetGuests();
             if (guests != null)
             {
                 foreach (var guest in guests)
@@ -45,6 +46,13 @@ namespace PresentationLayer.Receptionist
 
         private void cbbGuest_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string selectedName = cbbGuest.SelectedItem.ToString();
+            var selectedGuest = guests.FirstOrDefault(g => g.FullName == selectedName);
+            if (selectedGuest != null)
+            {
+                this.GuestID = selectedGuest.GuestID;
+                this.FullName = selectedGuest.FullName;
+            }
             this.txtCheckinTime.Text = CheckinTime.ToString("yyyy-MM-dd HH:mm:ss");
             this.txtCheckoutTime.Text = CheckoutTime.ToString("yyyy-MM-dd HH:mm:ss");
             this.txtRoom.Text = string.Join(", ", RoomIDs);
