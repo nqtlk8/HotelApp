@@ -56,7 +56,6 @@ namespace DataAccessLayer
                 {
                     DatabaseConnector.Close(connection);
                 }
-                return null;
 
             }
         }

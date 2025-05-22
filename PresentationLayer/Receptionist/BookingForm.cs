@@ -24,15 +24,6 @@ namespace PresentationLayer.Receptionist
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblRooms_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private async void BookingForm_Load(object sender, EventArgs e)
         {

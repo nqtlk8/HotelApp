@@ -65,7 +65,6 @@
             this.lblRooms.Size = new System.Drawing.Size(89, 16);
             this.lblRooms.TabIndex = 2;
             this.lblRooms.Text = "Checkin Time";
-            this.lblRooms.Click += new System.EventHandler(this.lblRooms_Click);
             // 
             // txtCheckinTime
             // 
@@ -82,7 +81,6 @@
             this.label1.Size = new System.Drawing.Size(97, 16);
             this.label1.TabIndex = 4;
             this.label1.Text = "Checkout Time";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // txtCheckoutTime
             // 

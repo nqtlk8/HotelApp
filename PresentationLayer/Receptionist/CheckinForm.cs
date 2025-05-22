@@ -15,10 +15,9 @@ namespace PresentationLayer.Receptionist
 {
     public partial class CheckinForm : Form
     {
-        private List<Guest> listNameBooking = new List<Guest>();
         private List<Guest> listNameGuest = new List<Guest>();
-        private string bookingID;
-        private List<string> bookingNames = new List<string>();
+        public string bookingID { get; set; }
+        public string GuestBooking { get; set; }
         private List<string> guestNames = new List<string>();
 
         public CheckinForm()
@@ -28,54 +27,16 @@ namespace PresentationLayer.Receptionist
 
         private async void CheckinForm_Load(object sender, EventArgs e)
         {
-            listNameBooking = await DataAccessLayer.ListNameSearch.GetListName("Booking");
             listNameGuest = await DataAccessLayer.ListNameSearch.GetListName("Guest");
 
             guestNames = listNameGuest.Select(g => g.FullName).ToList();
-            bookingNames = listNameBooking.Select(g => g.FullName).ToList();
+            txtGuestBooking.Text = GuestBooking;
+            List<string> rooms = await DataAccessLayer.GetRoomIDbyBookingID.GetRoomIDbyBooking(bookingID);
+            txtRooms.Text = string.Join(", ", rooms);
         }
 
-        private void txtGuestBooking_TextChanged(object sender, EventArgs e)
-        {
-            lstGuestBooking.Visible = true;
-            string keyword = txtGuestBooking.Text.ToLower();
-            var filteredGuests = bookingNames
-                .Where(name => name.ToLower().Contains(keyword))
-                .ToList();
-
-            LoadGuestBookings(filteredGuests);
-
-        }
-        private void LoadGuestBookings(List<string> guests)
-        {
-            lstGuestBooking.Items.Clear();
-            foreach (var guest in guests)
-            {
-                lstGuestBooking.Items.Add(guest);
-            }
-        }
-
-        private async void lstGuestBooking_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-            txtGuestBooking.Text = lstGuestBooking.SelectedItem.ToString();
-
-            bookingID = await DataAccessLayer.GetBookingIDbyNameDAL.GetBookingIDbyFullname(txtGuestBooking.Text);
-
-            var roomIDs = await DataAccessLayer.GetRoomIDbyBookingID.GetRoomIDbyBooking(bookingID);
-
-            if (roomIDs != null)
-            {
-                txtRooms.Text = string.Join(", ", roomIDs);
-            }
-            else
-            {
-                MessageBox.Show("❌ Không tìm thấy phòng nào cho Booking này.");
-            }
-            lstGuestBooking.Visible = false;
-
-
-        }
+        
+     
 
         private void txtGuests_TextChanged(object sender, EventArgs e)
         {

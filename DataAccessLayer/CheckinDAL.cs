@@ -30,7 +30,7 @@ namespace DataAccessLayer
                     using (var command = new SQLiteCommand(insertStayPeriodQuery, connection))
                     {
                         command.Parameters.AddWithValue("@BookingID", stayPeriod.BookingID);
-                        command.Parameters.AddWithValue("@CheckinActual", stayPeriod.CheckinActual.ToString("yyyy-MM-dd"));
+                        command.Parameters.AddWithValue("@CheckinActual", stayPeriod.CheckinActual.ToString("yyyy-MM-dd HH:mm:ss"));
                         stayPeriodId = (long)await command.ExecuteScalarAsync();
                     }
 

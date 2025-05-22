@@ -87,11 +87,23 @@
     <Compile Include="Receptionist\BookingForm.Designer.cs">
       <DependentUpon>BookingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Receptionist\BookingList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receptionist\BookingList.Designer.cs">
+      <DependentUpon>BookingList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Receptionist\CheckinForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Receptionist\CheckinForm.Designer.cs">
       <DependentUpon>CheckinForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Receptionist\CheckinList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receptionist\CheckinList.Designer.cs">
+      <DependentUpon>CheckinList.cs</DependentUpon>
     </Compile>
     <Compile Include="Receptionist\ReceptionistMainForm.cs">
       <SubType>Form</SubType>
@@ -118,8 +130,14 @@
     <EmbeddedResource Include="Receptionist\BookingForm.resx">
       <DependentUpon>BookingForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Receptionist\BookingList.resx">
+      <DependentUpon>BookingList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Receptionist\CheckinForm.resx">
       <DependentUpon>CheckinForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receptionist\CheckinList.resx">
+      <DependentUpon>CheckinList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Receptionist\ReceptionistMainForm.resx">
       <DependentUpon>ReceptionistMainForm.cs</DependentUpon>

@@ -132,9 +132,15 @@ namespace PresentationLayer.Receptionist
 
         private void btnCheckin_Click(object sender, EventArgs e)
         {
-            CheckinForm checkinForm = new CheckinForm();
-            checkinForm.ShowDialog();
+            BookingList listBooking = new BookingList();
+            listBooking.ShowDialog();
 
+        }
+
+        private void btnCheckout_Click(object sender, EventArgs e)
+        {
+            CheckinList listCheckin = new CheckinList();
+            listCheckin.ShowDialog();
         }
     }
 }

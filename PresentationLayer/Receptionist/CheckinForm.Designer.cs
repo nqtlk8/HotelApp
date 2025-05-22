@@ -35,7 +35,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtGuests = new System.Windows.Forms.TextBox();
             this.lstGuests = new System.Windows.Forms.ListBox();
-            this.lstGuestBooking = new System.Windows.Forms.ListBox();
             this.btnCheckin = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -54,7 +53,6 @@
             this.txtGuestBooking.Name = "txtGuestBooking";
             this.txtGuestBooking.Size = new System.Drawing.Size(202, 22);
             this.txtGuestBooking.TabIndex = 1;
-            this.txtGuestBooking.TextChanged += new System.EventHandler(this.txtGuestBooking_TextChanged);
             // 
             // label1
             // 
@@ -101,22 +99,11 @@
             this.lstGuests.Visible = false;
             this.lstGuests.SelectedIndexChanged += new System.EventHandler(this.lstGuests_SelectedIndexChanged);
             // 
-            // lstGuestBooking
-            // 
-            this.lstGuestBooking.FormattingEnabled = true;
-            this.lstGuestBooking.ItemHeight = 16;
-            this.lstGuestBooking.Location = new System.Drawing.Point(152, 113);
-            this.lstGuestBooking.Name = "lstGuestBooking";
-            this.lstGuestBooking.Size = new System.Drawing.Size(202, 116);
-            this.lstGuestBooking.TabIndex = 7;
-            this.lstGuestBooking.Visible = false;
-            this.lstGuestBooking.SelectedIndexChanged += new System.EventHandler(this.lstGuestBooking_SelectedIndexChanged);
-            // 
             // btnCheckin
             // 
             this.btnCheckin.Location = new System.Drawing.Point(226, 387);
             this.btnCheckin.Name = "btnCheckin";
-            this.btnCheckin.Size = new System.Drawing.Size(75, 23);
+            this.btnCheckin.Size = new System.Drawing.Size(128, 34);
             this.btnCheckin.TabIndex = 8;
             this.btnCheckin.Text = "Check-in";
             this.btnCheckin.UseVisualStyleBackColor = true;
@@ -128,7 +115,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 450);
             this.Controls.Add(this.btnCheckin);
-            this.Controls.Add(this.lstGuestBooking);
             this.Controls.Add(this.lstGuests);
             this.Controls.Add(this.txtGuests);
             this.Controls.Add(this.label2);
@@ -155,7 +141,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtGuests;
         private System.Windows.Forms.ListBox lstGuests;
-        private System.Windows.Forms.ListBox lstGuestBooking;
         private System.Windows.Forms.Button btnCheckin;
     }
 }

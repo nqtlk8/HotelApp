@@ -28,8 +28,8 @@ namespace DataAccessLayer
                         command.Parameters.AddWithValue("@GuestID", booking.GuestID);
                         command.Parameters.AddWithValue("@FullName", booking.FullName);
                         command.Parameters.AddWithValue("@TotalPrice", booking.TotalPrice);
-                        command.Parameters.AddWithValue("@Checkin", booking.CheckInDate.ToString("yyyy-MM-dd"));
-                        command.Parameters.AddWithValue("@Checkout", booking.CheckOutDate.ToString("yyyy-MM-dd"));
+                        command.Parameters.AddWithValue("@Checkin", booking.CheckInDate.ToString("yyyy-MM-dd HH:mm:ss"));
+                        command.Parameters.AddWithValue("@Checkout", booking.CheckOutDate.ToString("yyyy-MM-dd HH:mm:ss"));
 
                         long bookingId = (long)await command.ExecuteScalarAsync();
                         if (bookingId <= 0) return -1;
