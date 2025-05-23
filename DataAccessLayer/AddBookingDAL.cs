@@ -10,6 +10,7 @@ namespace DataAccessLayer
 {
     public static class AddBookingDAL
     {
+        private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         public async static Task<int> AddBooking(Booking booking, List<int> roomIds)
         {
             string bookingQuery = @"
@@ -48,12 +49,14 @@ namespace DataAccessLayer
                                 await roomCmd.ExecuteNonQueryAsync();
                             }
                         }
+                        logger.Info($"Thêm booking thành công với BookingID: {bookingId}");
 
                         return (int)bookingId;
                     }
                 }
                 catch (Exception ex)
                 {
+                    logger.Error(ex, "Lỗi khi thêm booking");
                     System.Windows.Forms.MessageBox.Show("❌ Lỗi khi thêm booking: " + ex.Message);
                     return -1;
                 }

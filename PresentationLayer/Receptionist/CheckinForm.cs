@@ -15,6 +15,7 @@ namespace PresentationLayer.Receptionist
 {
     public partial class CheckinForm : Form
     {
+        private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         private List<Guest> listNameGuest = new List<Guest>();
         public string bookingID { get; set; }
         public string GuestBooking { get; set; }
@@ -106,10 +107,12 @@ namespace PresentationLayer.Receptionist
                     guestIDs.Add(Convert.ToInt32(guestID));
                 }
             }
-
+            logger.Info($"Đã thực hiện check-in cho BookingID: {bookingID} với khách: {string.Join(", ", guestNames)}");
 
             DataAccessLayer.CheckinDAL.Checkin(stayPeriod, guestIDs);
+            
             MessageBox.Show("✅ Check-in thành công!");
+            
 
         }
     }

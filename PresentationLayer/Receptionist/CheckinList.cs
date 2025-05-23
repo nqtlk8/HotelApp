@@ -13,6 +13,7 @@ namespace PresentationLayer.Receptionist
 {
     public partial class CheckinList : Form
     {
+        private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         private List<Booking> Checkin;
         public CheckinList()
         {
@@ -97,10 +98,12 @@ namespace PresentationLayer.Receptionist
             {
                 if (task.IsFaulted)
                 {
+                    logger.Error(task.Exception, "Lỗi khi thực hiện checkout");
                     MessageBox.Show("❌ Lỗi khi thực hiện checkout.");
                 }
                 else
                 {
+                    logger.Info($"Đã thực hiện checkout cho BookingID: {bookingID}");
                     MessageBox.Show("✅ Checkout thành công!");
                 }
             });

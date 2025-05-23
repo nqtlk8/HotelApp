@@ -10,6 +10,7 @@ namespace DataAccessLayer
 {
     public static class CheckinDAL
     {
+        private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         public static async Task<bool> Checkin(StayPeriod stayPeriod, List<int> guestIds)
         {
             string insertStayPeriodQuery = @"
@@ -44,11 +45,12 @@ namespace DataAccessLayer
                             await command.ExecuteNonQueryAsync();
                         }
                     }
-
+                    logger.Info($"Thêm StayPeriod thành công với StayPeriodID: {stayPeriodId}");
                     return true;
                 }
                 catch (Exception ex)
                 {
+                    logger.Error(ex, "Lỗi khi thêm check-in");
                     System.Windows.Forms.MessageBox.Show("❌ Lỗi khi check-in: " + ex.Message);
                     return false;
                 }

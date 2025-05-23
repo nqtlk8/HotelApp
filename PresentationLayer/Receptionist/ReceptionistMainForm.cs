@@ -10,11 +10,14 @@ using System.Windows.Forms;
 using Entities;
 using DataAccessLayer;
 using BusinessLogicLayer;
+using NLog;
 
 namespace PresentationLayer.Receptionist
 {
+    
     public partial class ReceptionistMainForm : Form
     {
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         public List<RoomCard> rooms = new List<RoomCard>();
         public ReceptionistMainForm()
         {

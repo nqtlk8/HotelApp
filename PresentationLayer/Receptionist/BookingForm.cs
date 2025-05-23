@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entities;
 using BusinessLogicLayer;
+using NLog;
+using Shared;
 
 namespace PresentationLayer.Receptionist
 {
     public partial class BookingForm : Form
     {
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         public DateTime CheckinTime { get; set; }
         public DateTime CheckoutTime { get; set; }
         public List<int> RoomIDs { get; set; }
@@ -60,7 +63,11 @@ namespace PresentationLayer.Receptionist
 
         private async void btnConfirm_Click(object sender, EventArgs e)
         {
+            
             Booking booking = new Booking(GuestID, FullName, CheckinTime, CheckoutTime, 10);
+
+            logger.Info($"Đã thực hiện đặt phòng cho khách {FullName}");
+
             int addbooking = await DataAccessLayer.AddBookingDAL.AddBooking(booking, RoomIDs);
             if (addbooking > 0)
             {
@@ -69,6 +76,7 @@ namespace PresentationLayer.Receptionist
             }
             else
             {
+                logger.Error($"Đặt phòng thất bại cho khách {FullName}");
                 MessageBox.Show("❌ Đặt phòng thất bại!");
             }
         }

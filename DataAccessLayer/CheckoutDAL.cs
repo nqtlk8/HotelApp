@@ -10,6 +10,7 @@ namespace DataAccessLayer
 {
     public static class CheckoutDAL
     {
+        private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         public static async Task CheckoutAsync(int bookingID)
         {
             using (var connection = await DatabaseConnector.ConnectAsync())
@@ -37,16 +38,19 @@ namespace DataAccessLayer
 
                         if (rowsAffected > 0)
                         {
+                            logger.Info($"Checkout thành công cho BookingID: {bookingID}");
                             MessageBox.Show("✅ Checkout thành công!");
                         }
                         else
                         {
+                            logger.Warn($"Không tìm thấy dòng phù hợp để checkout cho BookingID: {bookingID}");
                             MessageBox.Show("⚠️ Không tìm thấy dòng phù hợp để checkout.");
                         }
                     }
                 }
                 catch (Exception ex)
                 {
+                    logger.Error(ex, "Lỗi khi thực hiện checkout");
                     MessageBox.Show("❌ Lỗi khi thực hiện checkout: " + ex.Message);
                 }
                 finally
