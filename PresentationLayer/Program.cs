@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PresentationLayer.Admin;
 using PresentationLayer.Receptionist;
 namespace PresentationLayer
 {
@@ -16,6 +17,7 @@ namespace PresentationLayer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            /*
             LoginForm loginForm = new LoginForm();
 
             if (loginForm.ShowDialog() == DialogResult.OK)
@@ -23,7 +25,9 @@ namespace PresentationLayer
                 // Nếu loginForm trả về OK thì chạy MainForm
                 Application.Run(new ReceptionistMainForm());
             }
-
+            */
+            MainForm mainForm = new MainForm();
+            Application.Run(new MainForm());
         }
     }
 }

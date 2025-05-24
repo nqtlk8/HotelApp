@@ -67,6 +67,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ServiceManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\ServiceManagementForm.Designer.cs">
+      <DependentUpon>ServiceManagementForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Invoice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +124,12 @@
       <DependentUpon>ReceptionistMainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Receptionist\SelectedRoomCard.cs" />
+    <EmbeddedResource Include="Admin\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\ServiceManagementForm.resx">
+      <DependentUpon>ServiceManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Invoice.resx">
       <DependentUpon>Invoice.cs</DependentUpon>
     </EmbeddedResource>

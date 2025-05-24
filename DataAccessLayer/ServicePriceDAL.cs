@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Entities;
+using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -44,7 +46,12 @@ namespace DataAccessLayer
                 {
                     DatabaseConnector.Close(connection);
                 }
+
+
             }
         }
     }
-}
+            
+        }
+    
+

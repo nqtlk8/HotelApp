@@ -84,6 +84,7 @@
     <Compile Include="RoomCard.Designer.cs">
       <DependentUpon>RoomCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="ServiceBLL.cs" />
     <Compile Include="SetAvaiable.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

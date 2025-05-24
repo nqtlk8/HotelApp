@@ -97,18 +97,13 @@ namespace PresentationLayer.Receptionist
         private void lstBookings_SelectedIndexChanged(object sender, EventArgs e)
         {
             CheckinForm checkinForm = new CheckinForm();
-<<<<<<< Updated upstream
+
             checkinForm.GuestBooking = lstBookings.SelectedItems[0].SubItems[2].Text;
             checkinForm.bookingID = lstBookings.SelectedItems[0].SubItems[0].Text;
 
             checkinForm.ShowDialog();
 
-=======
-            
-            checkinForm.GuestBooking = lstBookings.SelectedItems[0].SubItems[2].Text;
-            checkinForm.bookingID = lstBookings.SelectedItems[0].SubItems[0].Text;
-            checkinForm.ShowDialog();
->>>>>>> Stashed changes
+
         }
     }
 }
