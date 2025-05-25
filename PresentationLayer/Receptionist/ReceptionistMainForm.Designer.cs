@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnCheckin = new System.Windows.Forms.Button();
             this.btnBooking = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.flpRoomList = new System.Windows.Forms.FlowLayoutPanel();
@@ -39,7 +40,7 @@
             this.lblFrom = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.btnCheckin = new System.Windows.Forms.Button();
+            this.btnCheckout = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -47,6 +48,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnCheckout);
             this.panel1.Controls.Add(this.btnCheckin);
             this.panel1.Controls.Add(this.btnBooking);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -55,9 +57,19 @@
             this.panel1.Size = new System.Drawing.Size(200, 450);
             this.panel1.TabIndex = 1;
             // 
+            // btnCheckin
+            // 
+            this.btnCheckin.Location = new System.Drawing.Point(37, 261);
+            this.btnCheckin.Name = "btnCheckin";
+            this.btnCheckin.Size = new System.Drawing.Size(113, 69);
+            this.btnCheckin.TabIndex = 1;
+            this.btnCheckin.Text = "Check-In";
+            this.btnCheckin.UseVisualStyleBackColor = true;
+            this.btnCheckin.Click += new System.EventHandler(this.btnCheckin_Click);
+            // 
             // btnBooking
             // 
-            this.btnBooking.Location = new System.Drawing.Point(37, 266);
+            this.btnBooking.Location = new System.Drawing.Point(37, 186);
             this.btnBooking.Name = "btnBooking";
             this.btnBooking.Size = new System.Drawing.Size(113, 69);
             this.btnBooking.TabIndex = 0;
@@ -149,15 +161,15 @@
             this.dateTimePicker1.TabIndex = 0;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
-            // btnCheckin
+            // btnCheckout
             // 
-            this.btnCheckin.Location = new System.Drawing.Point(37, 352);
-            this.btnCheckin.Name = "btnCheckin";
-            this.btnCheckin.Size = new System.Drawing.Size(113, 69);
-            this.btnCheckin.TabIndex = 1;
-            this.btnCheckin.Text = "Check-In";
-            this.btnCheckin.UseVisualStyleBackColor = true;
-            this.btnCheckin.Click += new System.EventHandler(this.btnCheckin_Click);
+            this.btnCheckout.Location = new System.Drawing.Point(37, 336);
+            this.btnCheckout.Name = "btnCheckout";
+            this.btnCheckout.Size = new System.Drawing.Size(113, 69);
+            this.btnCheckout.TabIndex = 2;
+            this.btnCheckout.Text = "Check-out";
+            this.btnCheckout.UseVisualStyleBackColor = true;
+            this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
             // 
             // ReceptionistMainForm
             // 
@@ -190,5 +202,6 @@
         private System.Windows.Forms.Label lblRoomTypeSelected;
         private System.Windows.Forms.Button btnBooking;
         private System.Windows.Forms.Button btnCheckin;
+        private System.Windows.Forms.Button btnCheckout;
     }
 }

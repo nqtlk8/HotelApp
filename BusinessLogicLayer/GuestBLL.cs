@@ -96,11 +96,14 @@ namespace BusinessLogicLayer
                 return await GetGuestDAL.DeleteGuest(guestId);
             }
             catch (Exception ex)
-        public static async Task<Guest> GetGuestByInvoiceIDAsync(int invoiceID)
-        {
-                MessageBox.Show("❌ Error deleting guest: " + ex.Message);
+            {
+                MessageBox.Show("❌ Error updating guest: " + ex.Message);
                 return false;
             }
+            }
+        public static async Task<Guest> GetGuestByInvoiceIDAsync(int invoiceID)
+        {
+            
             return await GuestDAL.GetGuestByInvoiceIDAsync(invoiceID);
         }
     }

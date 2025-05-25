@@ -10,11 +10,14 @@ using System.Windows.Forms;
 using Entities;
 using DataAccessLayer;
 using BusinessLogicLayer;
+using NLog;
 
 namespace PresentationLayer.Receptionist
 {
+    
     public partial class ReceptionistMainForm : Form
     {
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         public List<RoomCard> rooms = new List<RoomCard>();
         public ReceptionistMainForm()
         {
@@ -132,9 +135,15 @@ namespace PresentationLayer.Receptionist
 
         private void btnCheckin_Click(object sender, EventArgs e)
         {
-            CheckinForm checkinForm = new CheckinForm();
-            checkinForm.ShowDialog();
+            BookingList listBooking = new BookingList();
+            listBooking.ShowDialog();
 
+        }
+
+        private void btnCheckout_Click(object sender, EventArgs e)
+        {
+            CheckinList listCheckin = new CheckinList();
+            listCheckin.ShowDialog();
         }
     }
 }

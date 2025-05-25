@@ -8,11 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogicLayer;
+using NLog;
 using PresentationLayer.Receptionist;
+using Shared;
+
 namespace PresentationLayer
 {
     public partial class LoginForm : Form
     {
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         public LoginForm()
         {
             InitializeComponent();
@@ -34,7 +38,15 @@ namespace PresentationLayer
             if (isAuthenticated)
             {
                 MessageBox.Show("Đăng nhập thành công");
+                CurrentUser.Username = username; // Lưu thông tin người dùng hiện tại
+
                 this.DialogResult = DialogResult.OK;
+                // Gán username vào MDC để log ghi nhận
+                NLog.GlobalDiagnosticsContext.Set("Username", username);
+
+                logger.Info("Đăng nhập thành công");
+
+                NLog.LogManager.Flush(); // 🟢 đảm bảo ghi log xong trước khi đóng
                 this.Close(); // đóng form đăng nhập
             }
             else

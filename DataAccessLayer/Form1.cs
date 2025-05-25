@@ -22,11 +22,12 @@ namespace DataAccessLayer
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            List<Guest> listnameguse = await ListNameSearch.GetListName("Guest");
-            foreach (var name in listnameguse)
+            List<Booking> checkin = await GetCheckinDAL.GetCheckin();
+            foreach (var  booking in checkin)
             {
-                MessageBox.Show(name.FullName);
+                MessageBox.Show(booking.BookingID.ToString());
             }
+
         }
         
        

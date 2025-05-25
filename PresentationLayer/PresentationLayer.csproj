@@ -42,8 +42,14 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.5.2.0\lib\net46\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog.Database, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.Database.5.2.0\lib\net46\NLog.Database.dll</HintPath>
+    </Reference>
     <Reference Include="System">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -59,6 +65,10 @@
     </Reference>
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Windows.Forms.DataVisualization.Design" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -102,11 +112,23 @@
     <Compile Include="Receptionist\BookingForm.Designer.cs">
       <DependentUpon>BookingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Receptionist\BookingList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receptionist\BookingList.Designer.cs">
+      <DependentUpon>BookingList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Receptionist\CheckinForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Receptionist\CheckinForm.Designer.cs">
       <DependentUpon>CheckinForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Receptionist\CheckinList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receptionist\CheckinList.Designer.cs">
+      <DependentUpon>CheckinList.cs</DependentUpon>
     </Compile>
     <Compile Include="Receptionist\ReceptionistMainForm.cs">
       <SubType>Form</SubType>
@@ -141,8 +163,14 @@
     <EmbeddedResource Include="Receptionist\BookingForm.resx">
       <DependentUpon>BookingForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Receptionist\BookingList.resx">
+      <DependentUpon>BookingList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Receptionist\CheckinForm.resx">
       <DependentUpon>CheckinForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receptionist\CheckinList.resx">
+      <DependentUpon>CheckinList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Receptionist\ReceptionistMainForm.resx">
       <DependentUpon>ReceptionistMainForm.cs</DependentUpon>
@@ -151,6 +179,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -177,6 +211,10 @@
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{b7a6812d-e2a1-438c-9011-23421b08d776}</Project>
       <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{8da1efee-e7d6-4519-a9a2-b50664c4d8aa}</Project>
+      <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
