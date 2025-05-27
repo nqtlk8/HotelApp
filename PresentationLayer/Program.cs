@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using PresentationLayer.Receptionist;
 using NLog;
 using NLog.Config;
+using PresentationLayer.Admin;
 
 
 namespace PresentationLayer
@@ -21,17 +22,24 @@ namespace PresentationLayer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //AdminForm loginForm = new AdminForm();
 
-            //if (loginForm.ShowDialog() == DialogResult.OK)
-            //{
-            //    // Nếu loginForm trả về OK thì chạy MainForm
-            //    Application.Run(new ReceptionistMainForm());
-            //}
+            MainForm mainForm = new MainForm();
+            Application.Run(new MainForm());
 
-            //Application.Run(new Invoice(30));
+            AdminForm loginForm = new AdminForm();
+
+            if (loginForm.ShowDialog() == DialogResult.OK)
+            {
+                // Nếu loginForm trả về OK thì chạy MainForm
+                Application.Run(new ReceptionistMainForm());
+            }
             
-            Application.Run(new ReceptionistMainForm());
+
+            Application.Run(new Invoice(30));
+
+            //Application.Run(new Form());
+
+            //Application.Run(new GuestCreateForm());
         }
     }
 }

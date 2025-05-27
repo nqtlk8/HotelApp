@@ -117,7 +117,7 @@ namespace BusinessLogicLayer
                     int quantity = service.Quantity;
                     DateTime usedDate = service.UsedDate;
 
-                    double? price = await ServicePriceDAL.GetPriceByServiceId(serviceId, usedDate);
+                    double? price = await ServicePriceDAL.GetPriceByUsedDate(serviceId, usedDate);
                     if (price.HasValue)
                     {
                         serviceTotal += price.Value * quantity;
@@ -175,7 +175,7 @@ namespace BusinessLogicLayer
             {
                 foreach (var service in bookingServices)
                 {
-                    double? price = await ServicePriceDAL.GetPriceByServiceId(service.ServiceID, service.UsedDate);
+                    double? price = await ServicePriceDAL.GetPriceByUsedDate(service.ServiceID, service.UsedDate);
                     if (price.HasValue)
                     {
                         var detail = new InvoiceServiceDetail

@@ -12,12 +12,31 @@ namespace Entities
         public string ServiceName { get; set; }
         public string Descrip { get; set; }
 
+        public int IsActive { get; set; }
+
+        public ServiceInfo()
+        {
+
+        }
+        public ServiceInfo(int serviceID, string serviceName, string descrip, int isActive)
+        {
+            ServiceID = serviceID;
+            ServiceName = serviceName;
+            Descrip = descrip;
+            IsActive = isActive;
+        }
 
         public ServiceInfo(int serviceID, string serviceName, string descrip)
         {
             ServiceID = serviceID;
             ServiceName = serviceName;
             Descrip = descrip;
+        }
+        public ServiceInfo(string serviceName, string descrip, int isActive)
+        {
+            ServiceName = serviceName;
+            Descrip = descrip;
+            IsActive = isActive;
         }
         /*
 
