@@ -1,59 +1,50 @@
--- Thông tin khách
-CREATE TABLE Guest (
-    GuestID INTEGER PRIMARY KEY AUTOINCREMENT,
-    FullName TEXT NOT NULL,
-    PhoneNumber TEXT,
-    Email TEXT,
-    GuestPrivateInf TEXT -- Thông tin cá nhân riêng tư
-);
 
--- Thông tin đặt phòng
-CREATE TABLE Booking (
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS Booking (
     BookingID INTEGER PRIMARY KEY AUTOINCREMENT,
-    GuestID INTEGER, -- Liên kết đến bảng Guest
-    FullName TEXT,   -- Tên người đặt (có thể khác Guest nếu đặt hộ)
-    TotalPrice REAL, -- Tổng chi phí (phòng + dịch vụ)
-    Checkin TEXT,    -- Ngày dự kiến check-in (định dạng ISO 8601: yyyy-MM-dd)
-    Checkout TEXT,   -- Ngày dự kiến check-out
+    GuestID INTEGER,
+    FullName TEXT,
+    TotalPrice REAL,
+    Checkin TEXT,
+    Checkout TEXT,
     FOREIGN KEY (GuestID) REFERENCES Guest(GuestID)
 );
-
--- Thông tin phòng đã đặt trong mỗi booking
-CREATE TABLE BookingRoom (
+CREATE TABLE IF NOT EXISTS BookingRoom (
     BookingRoomID INTEGER PRIMARY KEY AUTOINCREMENT,
     BookingID INTEGER,
     RoomID INTEGER,
     FOREIGN KEY (BookingID) REFERENCES Booking(BookingID),
     FOREIGN KEY (RoomID) REFERENCES RoomInfo(RoomID)
 );
-
--- Thông tin dịch vụ đã sử dụng trong mỗi booking
-CREATE TABLE BookingService (
+CREATE TABLE IF NOT EXISTS BookingService (
     BookingServiceID INTEGER PRIMARY KEY AUTOINCREMENT,
     BookingID INTEGER,
     ServiceID INTEGER,
     Quantity INTEGER,
-    UsedDate TEXT, -- Ngày sử dụng dịch vụ
+    UsedDate TEXT,
     FOREIGN KEY (BookingID) REFERENCES Booking(BookingID),
     FOREIGN KEY (ServiceID) REFERENCES ServiceInfo(ServiceID)
 );
-
--- Thông tin hoá đơn
-CREATE TABLE Invoice (
+CREATE TABLE IF NOT EXISTS Guest (
+    GuestID INTEGER PRIMARY KEY AUTOINCREMENT,
+    FullName TEXT NOT NULL,
+    PhoneNumber TEXT,
+    Email TEXT,
+    GuestPrivateInf TEXT
+);
+CREATE TABLE IF NOT EXISTS Invoice (
     InvoiceID INTEGER PRIMARY KEY AUTOINCREMENT,
     BookingID INTEGER NOT NULL,
-    InvoiceDate TEXT NOT NULL,     -- Ngày lập hoá đơn
-    RoomTotal REAL NOT NULL,       -- Tổng tiền phòng
-    ServiceTotal REAL NOT NULL,    -- Tổng tiền dịch vụ
-    VAT REAL NOT NULL,             -- Thuế giá trị gia tăng
-    Surcharge REAL NOT NULL,       -- Phụ phí
-    TotalPayment REAL NOT NULL,    -- Tổng tiền thanh toán
+    InvoiceDate TEXT NOT NULL,         -- SQLite không có kiểu DATETIME, dùng TEXT (ISO 8601) hoặc INTEGER (Unix time)
+    RoomTotal REAL NOT NULL,
+    ServiceTotal REAL NOT NULL,
+    VAT REAL NOT NULL,
+    Surcharge REAL NOT NULL,
+    TotalPayment REAL NOT NULL,
 
     FOREIGN KEY (BookingID) REFERENCES Booking(BookingID)
 );
-
--- Chi tiết tiền phòng trong hoá đơn
-CREATE TABLE InvoiceRoomDetail (
+CREATE TABLE IF NOT EXISTS InvoiceRoomDetail (
     InvoiceRoomDetailID INTEGER PRIMARY KEY AUTOINCREMENT,
     InvoiceID INTEGER,
     RoomID INTEGER,
@@ -62,9 +53,7 @@ CREATE TABLE InvoiceRoomDetail (
     FOREIGN KEY (InvoiceID) REFERENCES Invoice(InvoiceID),
     FOREIGN KEY (RoomID) REFERENCES RoomInfo(RoomID)
 );
-
--- Chi tiết tiền dịch vụ trong hoá đơn
-CREATE TABLE InvoiceServiceDetail (
+CREATE TABLE IF NOT EXISTS InvoiceServiceDetail (
     InvoiceServiceDetailID INTEGER PRIMARY KEY AUTOINCREMENT,
     InvoiceID INTEGER,
     ServiceID INTEGER,
@@ -73,18 +62,22 @@ CREATE TABLE InvoiceServiceDetail (
     FOREIGN KEY (InvoiceID) REFERENCES Invoice(InvoiceID),
     FOREIGN KEY (ServiceID) REFERENCES ServiceInfo(ServiceID)
 );
-
--- Thông tin phòng
-CREATE TABLE RoomInfo (
-    RoomID INTEGER PRIMARY KEY AUTOINCREMENT,
-    RoomType TEXT NOT NULL,       -- Loại phòng (ví dụ: Deluxe, Suite)
-    Capacity INTEGER,             -- Sức chứa
-    Description TEXT,             -- Mô tả thêm
-    Status VARCHAR(20) NOT NULL DEFAULT 'Sẵn sàng' -- Trạng thái (Sẵn sàng, Đã đặt, Bảo trì)
+CREATE TABLE IF NOT EXISTS Log (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Timestamp TEXT,
+    Level TEXT,
+    Logger TEXT,
+    Message TEXT,
+    Exception TEXT,
+    Username TEXT
 );
-
--- Bảng giá phòng theo thời gian
-CREATE TABLE RoomPrice (
+CREATE TABLE IF NOT EXISTS RoomInfo (
+    RoomID INTEGER PRIMARY KEY AUTOINCREMENT,
+    RoomType TEXT NOT NULL,
+    Capacity INTEGER,
+    Description TEXT
+, Status VARCHAR(20) NOT NULL DEFAULT 'Sẵn sàng');
+CREATE TABLE IF NOT EXISTS RoomPrice (
     PriceID INTEGER PRIMARY KEY AUTOINCREMENT,
     RoomID INTEGER,
     Price REAL,
@@ -92,17 +85,12 @@ CREATE TABLE RoomPrice (
     EndDate TEXT,
     FOREIGN KEY (RoomID) REFERENCES RoomInfo(RoomID)
 );
-
--- Thông tin dịch vụ
-CREATE TABLE ServiceInfo (
+CREATE TABLE IF NOT EXISTS ServiceInfo (
     ServiceID INTEGER PRIMARY KEY AUTOINCREMENT,
     ServiceName TEXT,
-    Descrip TEXT,                   -- Mô tả dịch vụ
-    IsActive INTEGER NOT NULL DEFAULT 1 -- Trạng thái dịch vụ (1: hoạt động, 0: không)
-);
-
--- Bảng giá dịch vụ theo thời gian
-CREATE TABLE ServicePrice (
+    Descrip TEXT
+, IsActive INTEGER NOT NULL DEFAULT 1);
+CREATE TABLE IF NOT EXISTS ServicePrice (
     ServicePriceID INTEGER PRIMARY KEY AUTOINCREMENT,
     ServiceID INTEGER,
     ServicePrice REAL,
@@ -110,39 +98,159 @@ CREATE TABLE ServicePrice (
     EndDate TEXT,
     FOREIGN KEY (ServiceID) REFERENCES ServiceInfo(ServiceID)
 );
-
--- Thời gian lưu trú thực tế
-CREATE TABLE StayPeriod (
-    StayPeriodID INTEGER PRIMARY KEY AUTOINCREMENT,
-    BookingID INTEGER,
-    CheckinActual TEXT,   -- Ngày check-in thực tế
-    CheckoutActual TEXT,  -- Ngày check-out thực tế
-    FOREIGN KEY (BookingID) REFERENCES Booking(BookingID)
+CREATE TABLE IF NOT EXISTS "StayPeriod" (
+	"StayPeriodID"	INTEGER,
+	"BookingID"	INTEGER,
+	"CheckinActual"	TEXT,
+	"CheckoutActual"	TEXT,
+	PRIMARY KEY("StayPeriodID" AUTOINCREMENT),
+	FOREIGN KEY("BookingID") REFERENCES "Booking"("BookingID")
 );
-
--- Chi tiết lưu trú của từng khách (trong 1 booking)
-CREATE TABLE StayPeriodDetail (
-    DetailID INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE IF NOT EXISTS StayPeriodDetail (
+    DetailID INTEGER PRIMARY KEY,
     StayPeriodID INTEGER NOT NULL,
     GuestID INTEGER NOT NULL,
-    FOREIGN KEY (StayPeriodID) REFERENCES StayPeriod(StayPeriodID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (GuestID) REFERENCES Guest(GuestID)
-);
 
--- Thông tin tài khoản người dùng hệ thống
-CREATE TABLE Users (
-    Username TEXT PRIMARY KEY, -- Dùng làm khóa chính
-    Password TEXT NOT NULL,
-    Role TEXT NOT NULL         -- Quyền (Admin, Nhân viên, v.v.)
+    CONSTRAINT FK_StayPeriodDetail_StayPeriod FOREIGN KEY (StayPeriodID)
+        REFERENCES StayPeriod(StayPeriodID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
+CREATE TABLE IF NOT EXISTS "Users" (
+	"Username"	TEXT NOT NULL UNIQUE,
+	"Password"	TEXT NOT NULL,
+	"Role"	TEXT NOT NULL,
+	PRIMARY KEY("Username")
+);
+-- 1. Guest
+INSERT INTO Guest (FullName, PhoneNumber, Email, GuestPrivateInf)
+VALUES
+('Nguyen Van A', '0912345678', 'a@gmail.com', 'CMND: 123456789'),
+('Le Thi B', '0987654321', 'b@gmail.com', 'CMND: 223344556'),
+('Tran Van C', '0901234567', 'c@gmail.com', 'CMND: 998877665'),
+('Pham Thi D', '0932123456', 'd@gmail.com', 'CCCD: 334455667'),
+('Hoang Van E', '0978123456', 'e@gmail.com', 'CCCD: 778899001');
 
--- Log hệ thống (ghi lại các hành động, lỗi, truy cập)
-CREATE TABLE Log (
-    Id INTEGER PRIMARY KEY AUTOINCREMENT,
-    Timestamp TEXT,      -- Thời gian ghi log
-    Level TEXT,          -- Mức độ (INFO, ERROR, DEBUG...)
-    Logger TEXT,         -- Tên module ghi log
-    Message TEXT,        -- Nội dung log
-    Exception TEXT,      -- Chi tiết lỗi (nếu có)
-    Username TEXT        -- Ai gây ra log này
-);
+-- 2. RoomInfo
+INSERT INTO RoomInfo (RoomType, Capacity, Description, Status)
+VALUES
+('VIP', 2, 'Phòng VIP view biển', 'Sẵn sàng'),
+('Standard', 2, 'Phòng tiêu chuẩn', 'Sẵn sàng'),
+('Deluxe', 3, 'Phòng rộng có ban công', 'Đang sử dụng'),
+('Standard', 1, 'Phòng đơn', 'Bảo trì'),
+('VIP', 4, 'Phòng VIP lớn', 'Sẵn sàng');
+
+-- 3. RoomPrice (RoomID = 1..5 tương ứng)
+INSERT INTO RoomPrice (RoomID, Price, StartDate, EndDate)
+VALUES
+(1, 1500000, '2025-01-01', '2025-12-31'),
+(2, 800000, '2025-01-01', '2025-12-31'),
+(3, 1200000, '2025-01-01', '2025-12-31'),
+(4, 700000, '2025-01-01', '2025-12-31'),
+(5, 1800000, '2025-01-01', '2025-12-31');
+
+-- 4. ServiceInfo
+INSERT INTO ServiceInfo (ServiceName, Descrip)
+VALUES
+('Spa', 'Dịch vụ spa thư giãn'),
+('Giặt ủi', 'Giặt và ủi đồ'),
+('Bữa sáng', 'Buffet sáng'),
+('Thuê xe', 'Cho thuê xe máy/ô tô'),
+('Massage', 'Dịch vụ massage thư giãn');
+
+-- 5. ServicePrice (ServiceID = 1..5)
+INSERT INTO ServicePrice (ServiceID, ServicePrice, StartDate, EndDate)
+VALUES
+(1, 200000, '2025-01-01', '2025-12-31'),
+(2, 50000, '2025-01-01', '2025-12-31'),
+(3, 100000, '2025-01-01', '2025-12-31'),
+(4, 150000, '2025-01-01', '2025-12-31'),
+(5, 180000, '2025-01-01', '2025-12-31');
+
+-- 6. Users
+INSERT INTO Users (Username, Password, Role)
+VALUES
+('admin', 'admin123', 'Admin'),
+('reception1', 'recept123', 'Lễ tân');
+
+
+-- 7. Booking (GuestID = 1..5)
+INSERT INTO Booking (GuestID, FullName, TotalPrice, Checkin, Checkout)
+VALUES
+(1, 'Nguyen Van A', 3200000, '2025-05-20', '2025-05-22'),
+(2, 'Le Thi B', 1500000, '2025-05-21', '2025-05-22'),
+(3, 'Tran Van C', 2000000, '2025-05-22', '2025-05-24'),
+(4, 'Pham Thi D', 1800000, '2025-05-23', '2025-05-25'),
+(5, 'Hoang Van E', 1600000, '2025-05-24', '2025-05-26');
+
+-- 8. BookingRoom
+INSERT INTO BookingRoom (BookingID, RoomID)
+VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
+
+-- 9. BookingService
+INSERT INTO BookingService (BookingID, ServiceID, Quantity, UsedDate)
+VALUES
+(1, 1, 1, '2025-05-20'),
+(2, 3, 2, '2025-05-21'),
+(3, 2, 3, '2025-05-22'),
+(4, 5, 1, '2025-05-23'),
+(5, 4, 2, '2025-05-24');
+
+-- 10. Invoice
+INSERT INTO Invoice (BookingID, InvoiceDate, RoomTotal, ServiceTotal, VAT, Surcharge, TotalPayment)
+VALUES
+(1, '2025-05-22', 3000000, 200000, 250000, 0, 3450000),
+(2, '2025-05-22', 1500000, 200000, 170000, 0, 1870000),
+(3, '2025-05-24', 1800000, 150000, 195000, 0, 2145000),
+(4, '2025-05-25', 1600000, 180000, 176000, 0, 1956000),
+(5, '2025-05-26', 1400000, 300000, 170000, 0, 1870000);
+
+-- 11. InvoiceRoomDetail
+INSERT INTO InvoiceRoomDetail (InvoiceID, RoomID, RoomPrice, Nights)
+VALUES
+(1, 1, 1500000, 2),
+(2, 2, 800000, 1),
+(3, 3, 1200000, 1),
+(4, 4, 700000, 2),
+(5, 5, 1800000, 1);
+
+-- 12. InvoiceServiceDetail
+INSERT INTO InvoiceServiceDetail (InvoiceID, ServiceID, ServicePrice, Quantity)
+VALUES
+(1, 1, 200000, 1),
+(2, 3, 100000, 2),
+(3, 2, 50000, 3),
+(4, 5, 180000, 1),
+(5, 4, 150000, 2);
+
+-- 13. Log
+INSERT INTO Log (Timestamp, Level, Logger, Message, Exception, Username)
+VALUES
+('2025-05-20T08:00:00', 'INFO', 'System', 'Đặt phòng thành công', NULL, 'admin'),
+('2025-05-21T09:00:00', 'INFO', 'BookingModule', 'Khách đặt dịch vụ', NULL, 'reception1'),
+('2025-05-22T10:00:00', 'ERROR', 'InvoiceModule', 'Lỗi khi tạo hóa đơn', 'TimeoutException', 'reception1'),
+('2025-05-23T11:00:00', 'WARN', 'ServiceCheck', 'Dịch vụ không hoạt động', NULL, 'manager'),
+('2025-05-24T12:00:00', 'INFO', 'CheckIn', 'Khách đã nhận phòng', NULL, 'reception1');
+
+-- 14. StayPeriod
+INSERT INTO StayPeriod (BookingID, CheckinActual, CheckoutActual)
+VALUES
+(1, '2025-05-20', '2025-05-22'),
+(2, '2025-05-21', '2025-05-22'),
+(3, '2025-05-22', '2025-05-24'),
+(4, '2025-05-23', '2025-05-25'),
+(5, '2025-05-24', '2025-05-26');
+
+-- 15. StayPeriodDetail
+INSERT INTO StayPeriodDetail (StayPeriodID, GuestID)
+VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
