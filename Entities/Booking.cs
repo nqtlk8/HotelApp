@@ -8,12 +8,53 @@ namespace Entities
 {
     public class Booking
     {
-        public int BookingID { get; set; }
-        public int GuestID { get; set; }
-        public string FullName { get; set; }
-        public DateTime CheckInDate { get; set; }
-        public DateTime CheckOutDate { get; set; }
-        public Double TotalPrice { get; set; }
+        // Private fields
+        private int _bookingID;
+        private int _guestID;
+        private string _fullName;
+        private DateTime _checkInDate;
+        private DateTime _checkOutDate;
+        private double _totalPrice;
+
+        // Constructor
+        
+
+        // Public properties
+        public int BookingID
+        {
+            get { return _bookingID; }
+            set { _bookingID = value; }
+        }
+
+        public int GuestID
+        {
+            get { return _guestID; }
+            set { _guestID = value; }
+        }
+
+        public string FullName
+        {
+            get { return _fullName; }
+            set { _fullName = value; }
+        }
+
+        public DateTime CheckInDate
+        {
+            get { return _checkInDate; }
+            set { _checkInDate = value; }
+        }
+
+        public DateTime CheckOutDate
+        {
+            get { return _checkOutDate; }
+            set { _checkOutDate = value; }
+        }
+
+        public double TotalPrice
+        {
+            get { return _totalPrice; }
+            set { _totalPrice = value; }
+        }
         public Booking(int guestID, string fullname,DateTime checkInDate, DateTime checkOutDate, Double totalPrice)
         {
             GuestID = guestID;

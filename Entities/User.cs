@@ -1,32 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities
 {
     public class User
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Role { get; set; } 
+        // Private fields
+        private string _username;
+        private string _password;
+        private string _role;
+
+        // Constructor
         public User(string username, string password, string role)
         {
-            Username = username;
-            Password = password;
-            Role = role;
+            _username = username;
+            _password = password;
+            _role = role;
         }
 
-        public override bool Equals(object obj)
+        // Public properties
+        public string Username
         {
-            return obj is User user &&
-                   Username == user.Username;
+            get { return _username; }
+            set { _username = value; }
         }
 
-        public override int GetHashCode()
+        public string Password
         {
-            return -182246463 + EqualityComparer<string>.Default.GetHashCode(Username);
+            get { return _password; }
+            set { _password = value; }
+        }
+
+        public string Role
+        {
+            get { return _role; }
+            set { _role = value; }
         }
     }
 }

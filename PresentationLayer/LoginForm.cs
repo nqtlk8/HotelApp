@@ -53,10 +53,10 @@ namespace PresentationLayer
                 Form mainForm = null;
                 switch (user.Role)
                 {
-                    case "admin":
+                    case "Admin":
                         mainForm = new MainForm();
                         break;
-                    case "Receptionist":
+                    case "Lễ tân":
                         mainForm = new MainFormRecep();
                         break;
                     default:

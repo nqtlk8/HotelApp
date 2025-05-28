@@ -1,55 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities
 {
     public class ServiceInfo
     {
-        public int ServiceID { get; set; }
-        public string ServiceName { get; set; }
-        public string Descrip { get; set; }
+        // Private fields
+        private int _serviceID;
+        private string _serviceName;
+        private string _descrip;
+        private int _isActive;
 
-        public int IsActive { get; set; }
-
+        // Constructor mặc định
         public ServiceInfo()
         {
-
         }
+
+        // Constructor đầy đủ
         public ServiceInfo(int serviceID, string serviceName, string descrip, int isActive)
         {
-            ServiceID = serviceID;
-            ServiceName = serviceName;
-            Descrip = descrip;
-            IsActive = isActive;
+            _serviceID = serviceID;
+            _serviceName = serviceName;
+            _descrip = descrip;
+            _isActive = isActive;
         }
 
+        // Constructor không có isActive
         public ServiceInfo(int serviceID, string serviceName, string descrip)
         {
-            ServiceID = serviceID;
-            ServiceName = serviceName;
-            Descrip = descrip;
+            _serviceID = serviceID;
+            _serviceName = serviceName;
+            _descrip = descrip;
         }
+
+        // Constructor không có serviceID
         public ServiceInfo(string serviceName, string descrip, int isActive)
         {
-            ServiceName = serviceName;
-            Descrip = descrip;
-            IsActive = isActive;
-        }
-        /*
-
-        public override bool Equals(object obj)
-        {
-            return obj is ServiceInfo info &&
-                   Service == info.Service;
+            _serviceName = serviceName;
+            _descrip = descrip;
+            _isActive = isActive;
         }
 
-        public override int GetHashCode()
+        // Public properties
+        public int ServiceID
         {
-            return 1514353572 + EqualityComparer<string>.Default.GetHashCode(Service);
+            get { return _serviceID; }
+            set { _serviceID = value; }
         }
-        */
+
+        public string ServiceName
+        {
+            get { return _serviceName; }
+            set { _serviceName = value; }
+        }
+
+        public string Descrip
+        {
+            get { return _descrip; }
+            set { _descrip = value; }
+        }
+
+        public int IsActive
+        {
+            get { return _isActive; }
+            set { _isActive = value; }
+        }
     }
 }

@@ -1,41 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities
 {
     public class StayPeriod
     {
-        public int StayPeriodID { get; set; }
-        public int BookingID { get; set; }
-        public DateTime  CheckinActual { get; set; }
-        public DateTime CheckoutActual { get; set; }
+        // Private fields
+        private int _stayPeriodID;
+        private int _bookingID;
+        private DateTime _checkinActual;
+        private DateTime _checkoutActual;
 
+        // Constructor đầy đủ
         public StayPeriod(int stayPeriodID, int bookingID, int guestID, DateTime checkinActual, DateTime checkoutActual)
         {
-            StayPeriodID = stayPeriodID;
-            BookingID = bookingID;
-            CheckinActual = checkinActual;
-            CheckoutActual = checkoutActual;
+            _stayPeriodID = stayPeriodID;
+            _bookingID = bookingID;
+            
+            _checkinActual = checkinActual;
+            _checkoutActual = checkoutActual;
         }
 
+        // Constructor rút gọn
         public StayPeriod(int bookingID, DateTime checkinActual)
         {
-            BookingID = bookingID;
-            CheckinActual = checkinActual;
+            _bookingID = bookingID;
+            _checkinActual = checkinActual;
         }
 
-        public override bool Equals(object obj)
+        // Public properties
+        public int StayPeriodID
         {
-            return obj is StayPeriod period &&
-                   StayPeriodID == period.StayPeriodID;
+            get { return _stayPeriodID; }
+            set { _stayPeriodID = value; }
         }
 
-        public override int GetHashCode()
+        public int BookingID
         {
-            return -1289241516 + StayPeriodID.GetHashCode();
+            get { return _bookingID; }
+            set { _bookingID = value; }
         }
+
+        public DateTime CheckinActual
+        {
+            get { return _checkinActual; }
+            set { _checkinActual = value; }
+        }
+
+        public DateTime CheckoutActual
+        {
+            get { return _checkoutActual; }
+            set { _checkoutActual = value; }
+        }
+
+        // Nếu bạn muốn, có thể thêm property GuestID:
+        /*
+        public int GuestID
+        {
+            get { return _guestID; }
+            set { _guestID = value; }
+        }
+        */
     }
 }

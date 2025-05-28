@@ -5,32 +5,43 @@ namespace Entities
 {
     public class BookingRoom
     {
-        public int BookingRoomID { get; set; }
-        public int BookingID { get; set; }
-        public int RoomID { get; set; }
+        // Private fields
+        private int _bookingRoomID;
+        private int _bookingID;
+        private int _roomID;
 
+        // Constructor không có BookingRoomID
         public BookingRoom(int bookingId, int roomId)
         {
-            BookingID = bookingId;
-            RoomID = roomId;
+            _bookingID = bookingId;
+            _roomID = roomId;
         }
 
+        // Constructor đầy đủ có BookingRoomID
         public BookingRoom(int bookingRoomId, int bookingId, int roomId)
         {
-            BookingRoomID = bookingRoomId;
-            BookingID = bookingId;
-            RoomID = roomId;
+            _bookingRoomID = bookingRoomId;
+            _bookingID = bookingId;
+            _roomID = roomId;
         }
 
-        public override bool Equals(object obj)
+        // Public properties
+        public int BookingRoomID
         {
-            return obj is BookingRoom room &&
-                   BookingRoomID == room.BookingRoomID;
+            get { return _bookingRoomID; }
+            set { _bookingRoomID = value; }
         }
 
-        public override int GetHashCode()
+        public int BookingID
         {
-            return 1292660469 + BookingRoomID.GetHashCode();
+            get { return _bookingID; }
+            set { _bookingID = value; }
+        }
+
+        public int RoomID
+        {
+            get { return _roomID; }
+            set { _roomID = value; }
         }
     }
 }
