@@ -12,7 +12,7 @@ namespace BusinessLogicLayer
 {
     public static class InvoiceBLL
     {
-
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         public static async Task<Invoice> GetInvoiceByIdAsync(int invoiceId)
         {
             // Gọi DAL lấy dữ liệu hóa đơn
@@ -93,6 +93,7 @@ namespace BusinessLogicLayer
             if (booking == null)
             {
                 MessageBox.Show("❌ Không tìm thấy booking.");
+                logger.Error($"Không tìm thấy booking với ID {bookingId} khi tạo hóa đơn.");
                 return null;
             }
 
@@ -114,6 +115,7 @@ namespace BusinessLogicLayer
                 else
                 {
                     MessageBox.Show($"⚠ Không tìm thấy giá phòng cho phòng {roomId} vào ngày {booking.CheckInDate:yyyy-MM-dd}");
+                    logger.Warn($"Không tìm thấy giá phòng cho phòng {roomId} vào ngày {booking.CheckInDate:yyyy-MM-dd} khi tạo hóa đơn.");
                 }
             }
 
@@ -136,6 +138,7 @@ namespace BusinessLogicLayer
                     else
                     {
                         MessageBox.Show($"⚠ Không tìm thấy giá cho dịch vụ {serviceId} vào ngày {usedDate:yyyy-MM-dd}");
+                        logger.Warn($"Không tìm thấy giá cho dịch vụ {serviceId} vào ngày {usedDate:yyyy-MM-dd} khi tạo hóa đơn.");
                     }
                 }
             }
@@ -161,10 +164,12 @@ namespace BusinessLogicLayer
             if (newInvoiceId == 0)
             {
                 MessageBox.Show("❌ Lỗi khi tạo hóa đơn.");
+                logger.Error($"Lỗi khi tạo hóa đơn cho booking {bookingId}.");
                 return null;
             }
-            invoice.InvoiceID = newInvoiceId;
 
+            invoice.InvoiceID = newInvoiceId;
+            logger.Info($"Tạo hóa đơn thành công cho booking {bookingId} với InvoiceID {newInvoiceId}.");
             // 8. Lưu chi tiết phòng
             foreach (int roomId in roomIds)
             {
@@ -178,6 +183,7 @@ namespace BusinessLogicLayer
                         pricePerNight.Value,
                         nights
                     ));
+                    logger.Info($"Lưu chi tiết phòng thành công cho InvoiceID {invoice.InvoiceID} với RoomID {roomId}.");
                 }
             }
 
@@ -198,6 +204,7 @@ namespace BusinessLogicLayer
                         };
 
                         await InvoiceServiceDetailDAL.InsertInvoiceServiceDetailAsync(detail);
+                        logger.Info($"Lưu chi tiết dịch vụ thành công cho InvoiceID {invoice.InvoiceID} với ServiceID {service.ServiceID}.");
 
                     }
                 }

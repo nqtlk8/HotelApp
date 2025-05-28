@@ -11,9 +11,6 @@ namespace PresentationLayer
     {
         private int invoiceID;  // Biến lưu ID hóa đơn đang xem
         public int bookingID;
-        private string guestName;
-        // Khai báo DataGridView
-       // private DataGridView dataGridView1;
 
         // Các label hiển thị tổng tiền, VAT, phụ thu, tổng thanh toán, số tiền bằng chữ
         private Label lblTotalText, lblTotal;
@@ -21,31 +18,13 @@ namespace PresentationLayer
         private Label lblLateFeeText, lblLateFee;
         private Label lblFinalTotalText;
         private Label lblAmountInWordsText, lblAmountInWords;
-
-        // Label hiển thị tên lễ tân và khách hàng
         private Label lblUser, lblUserName;
         private Label lblGuest, lblGuestName;
-
-        // Label hiển thị thông tin hóa đơn (mã hóa đơn và ngày hóa đơn)
         private Label lblInvoiceIDText, lblInvoiceID;
         private Label lblInvoiceDateText, lblInvoiceDate;
-
-       // private Label lblName, lblEmail, lblSDT, lblCCCD;
-        //private Label lblBookingID, lblCheckIn, lblCheckOut, lblCount;
-
         private Label  lblSurcharge, lblTotalPayment;
 
-        /*
-        // Các label info khách hàng - booking (giữ nguyên bạn tự thêm tương ứng)
-        public Label lblName;
-        public Label lblEmail;
-        public Label lblSDT;
-        public Label lblCCCD;
-        public Label lblBookingID;
-        public Label lblCheckIn;
-        public Label lblCheckOut;
-        public Label lblCount;
-        */
+     
         public InvoiceForm(int selectedInvoiceId)
         {
             InitializeComponent();     // Bắt buộc gọi đầu tiên, để tạo các control
@@ -61,8 +40,6 @@ namespace PresentationLayer
             LoadData();                // Load dữ liệu chung (ví dụ các danh sách, dữ liệu phụ)
 
             LoadInvoice();             // Load thông tin chi tiết hóa đơn (invoice)
-
-
 
         }
 
@@ -192,24 +169,7 @@ namespace PresentationLayer
                 TextAlign = ContentAlignment.MiddleRight,
                 Font = new Font("Arial", 10),
             };
-            /*
-            lblAmountInWordsText = new Label()
-            {
-                Location = new Point(20, lblTotalPayment.Bottom + 15),
-                Size = new Size(150, 25),
-                Text = "Số tiền bằng chữ:",
-                Font = new Font("Arial", 10, FontStyle.Bold),
-                TextAlign = ContentAlignment.MiddleLeft
-            };
-            lblAmountInWords = new Label()
-            {
-                Location = new Point(180, lblTotalPayment.Bottom + 15),
-                Size = new Size(440, 25),
-                TextAlign = ContentAlignment.MiddleLeft,
-                Font = new Font("Arial", 10, FontStyle.Italic),
-                AutoEllipsis = true,
-            };
-            */
+            
             
             lblUser = new Label()
             {
@@ -219,16 +179,7 @@ namespace PresentationLayer
                 Font = new Font("Arial", 10),
                 TextAlign = ContentAlignment.MiddleLeft
             };
-            /*
-            lblUserName = new Label()
-            {
-                Location = new Point(80, lblUser.Bottom + 20),
-                Size = new Size(200, 25),
-                Text = guestName,
-                TextAlign = ContentAlignment.MiddleLeft,
-                Font = new Font("Arial", 10),
-            };
-            */
+            
             lblGuest = new Label()
             {
                 Location = new Point(230, lblTotalPayment.Bottom + 20),
@@ -332,7 +283,6 @@ namespace PresentationLayer
 
                 }
 
-               // CalculateTotals();
             }
             catch (Exception ex)
             {
@@ -361,13 +311,6 @@ namespace PresentationLayer
            
         }
 
-        // Hàm chuyển số thành chữ tiếng Việt (bạn có thể dùng hàm hiện có hoặc viết mới)
-        private string NumberToVietnameseText(decimal number)
-        {
-            // Đây là ví dụ đơn giản, bạn nên dùng thư viện hoặc hàm chuẩn nếu có
-            // Hoặc bạn có thể cung cấp hàm số thành chữ bạn đang dùng
-            // Tạm thời trả về chuỗi giả định:
-            return "Một triệu hai trăm ba mươi nghìn đồng"; // Thay bằng hàm thực tế
-        }
+    
     }
 }

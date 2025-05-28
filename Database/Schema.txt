@@ -1,0 +1,148 @@
+-- Thông tin khách
+CREATE TABLE Guest (
+    GuestID INTEGER PRIMARY KEY AUTOINCREMENT,
+    FullName TEXT NOT NULL,
+    PhoneNumber TEXT,
+    Email TEXT,
+    GuestPrivateInf TEXT -- Thông tin cá nhân riêng tư
+);
+
+-- Thông tin đặt phòng
+CREATE TABLE Booking (
+    BookingID INTEGER PRIMARY KEY AUTOINCREMENT,
+    GuestID INTEGER, -- Liên kết đến bảng Guest
+    FullName TEXT,   -- Tên người đặt (có thể khác Guest nếu đặt hộ)
+    TotalPrice REAL, -- Tổng chi phí (phòng + dịch vụ)
+    Checkin TEXT,    -- Ngày dự kiến check-in (định dạng ISO 8601: yyyy-MM-dd)
+    Checkout TEXT,   -- Ngày dự kiến check-out
+    FOREIGN KEY (GuestID) REFERENCES Guest(GuestID)
+);
+
+-- Thông tin phòng đã đặt trong mỗi booking
+CREATE TABLE BookingRoom (
+    BookingRoomID INTEGER PRIMARY KEY AUTOINCREMENT,
+    BookingID INTEGER,
+    RoomID INTEGER,
+    FOREIGN KEY (BookingID) REFERENCES Booking(BookingID),
+    FOREIGN KEY (RoomID) REFERENCES RoomInfo(RoomID)
+);
+
+-- Thông tin dịch vụ đã sử dụng trong mỗi booking
+CREATE TABLE BookingService (
+    BookingServiceID INTEGER PRIMARY KEY AUTOINCREMENT,
+    BookingID INTEGER,
+    ServiceID INTEGER,
+    Quantity INTEGER,
+    UsedDate TEXT, -- Ngày sử dụng dịch vụ
+    FOREIGN KEY (BookingID) REFERENCES Booking(BookingID),
+    FOREIGN KEY (ServiceID) REFERENCES ServiceInfo(ServiceID)
+);
+
+-- Thông tin hoá đơn
+CREATE TABLE Invoice (
+    InvoiceID INTEGER PRIMARY KEY AUTOINCREMENT,
+    BookingID INTEGER NOT NULL,
+    InvoiceDate TEXT NOT NULL,     -- Ngày lập hoá đơn
+    RoomTotal REAL NOT NULL,       -- Tổng tiền phòng
+    ServiceTotal REAL NOT NULL,    -- Tổng tiền dịch vụ
+    VAT REAL NOT NULL,             -- Thuế giá trị gia tăng
+    Surcharge REAL NOT NULL,       -- Phụ phí
+    TotalPayment REAL NOT NULL,    -- Tổng tiền thanh toán
+
+    FOREIGN KEY (BookingID) REFERENCES Booking(BookingID)
+);
+
+-- Chi tiết tiền phòng trong hoá đơn
+CREATE TABLE InvoiceRoomDetail (
+    InvoiceRoomDetailID INTEGER PRIMARY KEY AUTOINCREMENT,
+    InvoiceID INTEGER,
+    RoomID INTEGER,
+    RoomPrice REAL,
+    Nights INTEGER,
+    FOREIGN KEY (InvoiceID) REFERENCES Invoice(InvoiceID),
+    FOREIGN KEY (RoomID) REFERENCES RoomInfo(RoomID)
+);
+
+-- Chi tiết tiền dịch vụ trong hoá đơn
+CREATE TABLE InvoiceServiceDetail (
+    InvoiceServiceDetailID INTEGER PRIMARY KEY AUTOINCREMENT,
+    InvoiceID INTEGER,
+    ServiceID INTEGER,
+    ServicePrice REAL,
+    Quantity INTEGER,
+    FOREIGN KEY (InvoiceID) REFERENCES Invoice(InvoiceID),
+    FOREIGN KEY (ServiceID) REFERENCES ServiceInfo(ServiceID)
+);
+
+-- Thông tin phòng
+CREATE TABLE RoomInfo (
+    RoomID INTEGER PRIMARY KEY AUTOINCREMENT,
+    RoomType TEXT NOT NULL,       -- Loại phòng (ví dụ: Deluxe, Suite)
+    Capacity INTEGER,             -- Sức chứa
+    Description TEXT,             -- Mô tả thêm
+    Status VARCHAR(20) NOT NULL DEFAULT 'Sẵn sàng' -- Trạng thái (Sẵn sàng, Đã đặt, Bảo trì)
+);
+
+-- Bảng giá phòng theo thời gian
+CREATE TABLE RoomPrice (
+    PriceID INTEGER PRIMARY KEY AUTOINCREMENT,
+    RoomID INTEGER,
+    Price REAL,
+    StartDate TEXT,
+    EndDate TEXT,
+    FOREIGN KEY (RoomID) REFERENCES RoomInfo(RoomID)
+);
+
+-- Thông tin dịch vụ
+CREATE TABLE ServiceInfo (
+    ServiceID INTEGER PRIMARY KEY AUTOINCREMENT,
+    ServiceName TEXT,
+    Descrip TEXT,                   -- Mô tả dịch vụ
+    IsActive INTEGER NOT NULL DEFAULT 1 -- Trạng thái dịch vụ (1: hoạt động, 0: không)
+);
+
+-- Bảng giá dịch vụ theo thời gian
+CREATE TABLE ServicePrice (
+    ServicePriceID INTEGER PRIMARY KEY AUTOINCREMENT,
+    ServiceID INTEGER,
+    ServicePrice REAL,
+    StartDate TEXT,
+    EndDate TEXT,
+    FOREIGN KEY (ServiceID) REFERENCES ServiceInfo(ServiceID)
+);
+
+-- Thời gian lưu trú thực tế
+CREATE TABLE StayPeriod (
+    StayPeriodID INTEGER PRIMARY KEY AUTOINCREMENT,
+    BookingID INTEGER,
+    CheckinActual TEXT,   -- Ngày check-in thực tế
+    CheckoutActual TEXT,  -- Ngày check-out thực tế
+    FOREIGN KEY (BookingID) REFERENCES Booking(BookingID)
+);
+
+-- Chi tiết lưu trú của từng khách (trong 1 booking)
+CREATE TABLE StayPeriodDetail (
+    DetailID INTEGER PRIMARY KEY AUTOINCREMENT,
+    StayPeriodID INTEGER NOT NULL,
+    GuestID INTEGER NOT NULL,
+    FOREIGN KEY (StayPeriodID) REFERENCES StayPeriod(StayPeriodID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (GuestID) REFERENCES Guest(GuestID)
+);
+
+-- Thông tin tài khoản người dùng hệ thống
+CREATE TABLE Users (
+    Username TEXT PRIMARY KEY, -- Dùng làm khóa chính
+    Password TEXT NOT NULL,
+    Role TEXT NOT NULL         -- Quyền (Admin, Nhân viên, v.v.)
+);
+
+-- Log hệ thống (ghi lại các hành động, lỗi, truy cập)
+CREATE TABLE Log (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Timestamp TEXT,      -- Thời gian ghi log
+    Level TEXT,          -- Mức độ (INFO, ERROR, DEBUG...)
+    Logger TEXT,         -- Tên module ghi log
+    Message TEXT,        -- Nội dung log
+    Exception TEXT,      -- Chi tiết lỗi (nếu có)
+    Username TEXT        -- Ai gây ra log này
+);
