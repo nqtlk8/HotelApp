@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entities;
-using DataAccessLayer;
 using BusinessLogicLayer;
 using NLog;
 
@@ -38,9 +32,9 @@ namespace PresentationLayer.Receptionist
         private async void ReceptionistMainForm_Load(object sender, EventArgs e)
         {
             // Lấy danh sách loại phòng từ Database
-            List<string> roomTypes = await DataAccessLayer.GetRoomTypeDAL.GetRoomType();
+            List<string> roomTypes = await RoomBLL.GetRoomType();
             // Lấy danh sách phòng từ Database
-            List<RoomInfo> roominfos = await DataAccessLayer.GetRoomInfoDAL.GetRoomInfo();
+            List<RoomInfo> roominfos = await RoomBLL.GetRoomInfo();
             foreach (var roominfo in roominfos)
             {
                 RoomCard roomCard = new RoomCard(roominfo.RoomID, roominfo.RoomType, roominfo.Capacity, roominfo.Description);
@@ -54,7 +48,7 @@ namespace PresentationLayer.Receptionist
             }
             // Load filter Roomtype
             DateTime selectedDate = dateTimePicker1.Value;
-            rooms = await BusinessLogicLayer.SetAvaiable.SetAvailable(rooms,selectedDate, selectedDate);
+            rooms = await SetAvaiable.SetAvailable(rooms,selectedDate, selectedDate);
             if (rooms != null)
             {
                 LoadRoomCards(rooms);
@@ -85,7 +79,7 @@ namespace PresentationLayer.Receptionist
         {
             var selectedStartDate = dateTimePicker1.Value;
             var selectedEndDate = dateTimePicker2.Value;
-            rooms = await BusinessLogicLayer.SetAvaiable.SetAvailable(rooms,selectedStartDate,selectedEndDate.AddDays(1));
+            rooms = await SetAvaiable.SetAvailable(rooms,selectedStartDate,selectedEndDate.AddDays(1));
             // Reset trạng thái chọn phòng
             foreach (var room in rooms)
             {
@@ -99,7 +93,7 @@ namespace PresentationLayer.Receptionist
         {
             var selectedStartDate = dateTimePicker1.Value;
             var selectedEndDate = dateTimePicker2.Value;
-            rooms = await BusinessLogicLayer.SetAvaiable.SetAvailable(rooms, selectedStartDate, selectedEndDate);
+            rooms = await SetAvaiable.SetAvailable(rooms, selectedStartDate, selectedEndDate);
             // Reset trạng thái chọn phòng
             foreach (var room in rooms)
             {
@@ -130,7 +124,7 @@ namespace PresentationLayer.Receptionist
         {
             List<string> selectedRoomTypes = GetSelectedRoomTypes();
 
-            rooms = BusinessLogicLayer.FilterRoomTypeBLL.FilterByRoomType(rooms, selectedRoomTypes);
+            rooms = FilterRoomTypeBLL.FilterByRoomType(rooms, selectedRoomTypes);
         }
 
         private void btnCheckin_Click(object sender, EventArgs e)

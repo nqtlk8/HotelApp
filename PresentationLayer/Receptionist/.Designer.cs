@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnCheckout = new System.Windows.Forms.Button();
             this.btnCheckin = new System.Windows.Forms.Button();
             this.btnBooking = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -40,7 +41,6 @@
             this.lblFrom = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.btnCheckout = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -48,14 +48,25 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.panel1.Controls.Add(this.btnCheckout);
             this.panel1.Controls.Add(this.btnCheckin);
             this.panel1.Controls.Add(this.btnBooking);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 450);
+            this.panel1.Size = new System.Drawing.Size(200, 808);
             this.panel1.TabIndex = 1;
+            // 
+            // btnCheckout
+            // 
+            this.btnCheckout.Location = new System.Drawing.Point(37, 336);
+            this.btnCheckout.Name = "btnCheckout";
+            this.btnCheckout.Size = new System.Drawing.Size(113, 69);
+            this.btnCheckout.TabIndex = 2;
+            this.btnCheckout.Text = "Check-out";
+            this.btnCheckout.UseVisualStyleBackColor = true;
+            this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
             // 
             // btnCheckin
             // 
@@ -84,19 +95,21 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(200, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(600, 450);
+            this.panel2.Size = new System.Drawing.Size(885, 808);
             this.panel2.TabIndex = 2;
             // 
             // flpRoomList
             // 
+            this.flpRoomList.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.flpRoomList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpRoomList.Location = new System.Drawing.Point(0, 117);
             this.flpRoomList.Name = "flpRoomList";
-            this.flpRoomList.Size = new System.Drawing.Size(600, 333);
+            this.flpRoomList.Size = new System.Drawing.Size(885, 691);
             this.flpRoomList.TabIndex = 1;
             // 
             // panel3
             // 
+            this.panel3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.panel3.Controls.Add(this.lblRoomTypeSelected);
             this.panel3.Controls.Add(this.clbRoomType);
             this.panel3.Controls.Add(this.lblTo);
@@ -106,7 +119,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(600, 117);
+            this.panel3.Size = new System.Drawing.Size(885, 117);
             this.panel3.TabIndex = 0;
             // 
             // lblRoomTypeSelected
@@ -161,23 +174,14 @@
             this.dateTimePicker1.TabIndex = 0;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
-            // btnCheckout
-            // 
-            this.btnCheckout.Location = new System.Drawing.Point(37, 336);
-            this.btnCheckout.Name = "btnCheckout";
-            this.btnCheckout.Size = new System.Drawing.Size(113, 69);
-            this.btnCheckout.TabIndex = 2;
-            this.btnCheckout.Text = "Check-out";
-            this.btnCheckout.UseVisualStyleBackColor = true;
-            this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
-            // 
             // ReceptionistMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1085, 808);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ReceptionistMainForm";
             this.Text = "ReceptionistMainForm";
             this.Load += new System.EventHandler(this.ReceptionistMainForm_Load);

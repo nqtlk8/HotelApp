@@ -14,7 +14,14 @@ namespace BusinessLogicLayer
         {
             return await BookingDAL.GetBookingByInvoiceIDAsync(invoiceId);
         }
-
+        public static async Task<List<Booking>> GetBooking()
+        {
+            return await BookingDAL.GetBookings();
+        }
+        public static async Task<List<Booking>> GetBookingsWithStayPeriodAsync()
+        {
+            return await BookingDAL.GetBookingsWithStayPeriodAsync();
+        }
 
     }
 }

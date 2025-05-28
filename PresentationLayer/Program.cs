@@ -22,24 +22,29 @@ namespace PresentationLayer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            /* 
+             MainFormRecep ainFormRecep = new MainFormRecep();
+             Application.Run(new MainFormRecep());
 
-            MainForm mainForm = new MainForm();
-            Application.Run(new MainForm());
 
-            AdminForm loginForm = new AdminForm();
+             MainForm mainForm = new MainForm();
+             Application.Run(new MainForm());
 
-            if (loginForm.ShowDialog() == DialogResult.OK)
-            {
-                // Nếu loginForm trả về OK thì chạy MainForm
-                Application.Run(new ReceptionistMainForm());
-            }
-            
+             DashboardForm loginForm = new DashboardForm();
 
-            Application.Run(new Invoice(30));
+             if (loginForm.ShowDialog() == DialogResult.OK)
+             {
+                 // Nếu loginForm trả về OK thì chạy MainForm
+                 Application.Run(new ReceptionistMainForm());
+             }
+             */
+
+            //Application.Run(new InvoiceForm(30));
 
             //Application.Run(new Form());
 
             //Application.Run(new GuestCreateForm());
+            Application.Run(new LoginForm());
         }
     }
 }

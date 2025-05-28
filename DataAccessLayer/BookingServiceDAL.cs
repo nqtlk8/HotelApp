@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Threading.Tasks;
@@ -44,5 +45,37 @@ namespace DataAccessLayer
                 }
             }
         }
+        public static async Task<bool> InsertBookingServiceAsync(BookingService service)
+        {
+            using (var connection = await DatabaseConnector.ConnectAsync())
+            {
+                if (connection == null) return false;
+
+                try
+                {
+                    string query = @"
+                INSERT INTO BookingService (BookingID, ServiceID, Quantity, UsedDate)
+                VALUES (@BookingID, @ServiceID, @Quantity, @UsedDate);
+            ";
+
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@BookingID", service.BookingID);
+                        command.Parameters.AddWithValue("@ServiceID", service.ServiceID);
+                        command.Parameters.AddWithValue("@Quantity", service.Quantity);
+                        command.Parameters.AddWithValue("@UsedDate", service.UsedDate);
+
+                        int rowsAffected = await command.ExecuteNonQueryAsync();
+                        return rowsAffected > 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("❌ Lỗi khi thêm BookingService: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
     }
 }

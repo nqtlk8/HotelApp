@@ -10,11 +10,11 @@ using BusinessLogicLayer;
 
 namespace PresentationLayer
 {
-    public partial class AdminForm : Form
+    public partial class DashboardForm : Form
     {
-        public AdminForm()
+        public DashboardForm()
         {
-            InitializeComponent();
+           InitializeComponent();
 
             // Initialize date range pickers with default values
             dtpStartDate.Value = DateTime.Now.AddMonths(-3); // Show last 3 months by default

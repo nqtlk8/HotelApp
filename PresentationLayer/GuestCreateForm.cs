@@ -156,5 +156,10 @@ namespace PresentationLayer
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
+        private void GuestCreateForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

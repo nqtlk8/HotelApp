@@ -60,7 +60,7 @@ namespace DataAccessLayer
 
                 try
                 {
-                    string query = "SELECT ServicePriceID, ServiceID, ServicePrice AS ServicePriceValue, StartDate, EndDate FROM ServicePrice WHERE ServiceID = @serviceID";
+                    string query = "SELECT DISTINCT ServicePriceID, ServiceID, ServicePrice AS ServicePriceValue, StartDate, EndDate FROM ServicePrice WHERE ServiceID = @serviceID";
                     using (var command = new SQLiteCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@serviceID", serviceID);

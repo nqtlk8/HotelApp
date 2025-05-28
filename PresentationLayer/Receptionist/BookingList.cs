@@ -96,11 +96,13 @@ namespace PresentationLayer.Receptionist
 
         private void lstBookings_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             CheckinForm checkinForm = new CheckinForm();
+            
             checkinForm.GuestBooking = lstBookings.SelectedItems[0].SubItems[2].Text;
             checkinForm.bookingID = lstBookings.SelectedItems[0].SubItems[0].Text;
 
-            checkinForm.ShowDialog();
+            checkinForm.Show();
 
         }
     }

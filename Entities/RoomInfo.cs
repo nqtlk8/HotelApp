@@ -12,6 +12,11 @@ namespace Entities
         public string RoomType { get; set; }
         public int Capacity { get; set; }
         public string Description { get; set; }
+
+        public string Status { get; set; }
+
+        public RoomInfo() { }
+
         public RoomInfo(int roomID, string roomType, int capacity,string description)
         {
             RoomID = roomID;

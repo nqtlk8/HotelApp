@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer;
 using Entities;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,14 @@ namespace BusinessLogicLayer
             // Gọi DAL lấy dữ liệu hóa đơn
             return await InvoiceDAL.GetInvoiceByIdAsync(invoiceId);
         }
+
+
+        
+            public static async Task<List<Invoice>> GetAllInvoicesAsync()
+            {
+                return await InvoiceDAL.GetAllInvoicesAsync();
+            }
+        
 
         public static async Task<List<InvoiceItemView>> GetInvoiceItemsForDisplay(int invoiceId)
         {
@@ -49,21 +58,23 @@ namespace BusinessLogicLayer
 
             // Chi tiết dịch vụ
             var serviceDetails = await InvoiceServiceDetailDAL.GetServiceDetailsByInvoiceId(invoiceId);
-            if (roomDetails != null)
+            if (serviceDetails != null)
             {
-                foreach (var service in serviceDetails)
-                {
-                    var serviceName = await ServiceDAL.GetServiceByID(service.ServiceID);
 
-                    items.Add(new InvoiceItemView
+                    foreach (var service in serviceDetails)
                     {
-                        Type = "Dịch vụ",
-                        Name = serviceName.ServiceName,
-                        UnitPrice = service.ServicePrice,
-                        Quantity = service.Quantity
-                        // Total sẽ tự tính trong property
-                    });
+                        var serviceName = await ServiceDAL.GetServiceByID(service.ServiceID);
 
+                        items.Add(new InvoiceItemView
+                        {
+                            Type = "Dịch vụ",
+                            Name = serviceName.ServiceName,
+                            UnitPrice = service.ServicePrice,
+                            Quantity = service.Quantity
+                            // Total sẽ tự tính trong property
+                        });
+
+                    
                 }
             }
             else
@@ -191,7 +202,7 @@ namespace BusinessLogicLayer
                     }
                 }
             }
-
+          
             return invoice;
         }
     }

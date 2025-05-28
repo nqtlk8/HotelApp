@@ -20,7 +20,9 @@ namespace DataAccessLayer
                 if (connection == null) return null;
                 try
                 {
-                    string query = "SELECT * FROM RoomInfo";
+                    // Chỉ lấy những phòng có Status = 'Sẵn sàng'
+                    string query = "SELECT * FROM RoomInfo WHERE Status = 'Sẵn sàng'";
+
                     using (var command = new SQLiteCommand(query, connection))
                     {
                         using (var reader = await command.ExecuteReaderAsync())

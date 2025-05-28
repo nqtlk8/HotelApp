@@ -6,7 +6,7 @@ using System.Drawing.Drawing2D;
 
 namespace PresentationLayer
 {
-    partial class AdminForm
+    partial class DashboardForm
     {
         private System.ComponentModel.IContainer components = null;
 

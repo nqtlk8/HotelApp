@@ -92,23 +92,35 @@
     <Compile Include="Admin\ServiceManagementForm.Designer.cs">
       <DependentUpon>ServiceManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Invoice.cs">
+    <Compile Include="Admin\RoomManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Invoice.Designer.cs">
-      <DependentUpon>Invoice.cs</DependentUpon>
+    <Compile Include="Admin\RoomManagementForm.Designer.cs">
+      <DependentUpon>RoomManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdminForm.cs">
+    <Compile Include="InvoiceForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminForm.Designer.cs">
-      <DependentUpon>AdminForm.cs</DependentUpon>
+    <Compile Include="InvoiceForm.Designer.cs">
+      <DependentUpon>InvoiceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\DashboardForm.Designer.cs">
+      <DependentUpon>DashboardForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GuestCreateForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GuestCreateForm.Designer.cs">
       <DependentUpon>GuestCreateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InvoiceList.Designer.cs">
+      <DependentUpon>InvoiceList.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -130,6 +142,12 @@
     <Compile Include="Receptionist\BookingList.Designer.cs">
       <DependentUpon>BookingList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Receptionist\BookingServiceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receptionist\BookingServiceForm.Designer.cs">
+      <DependentUpon>BookingServiceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Receptionist\CheckinForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,11 +160,24 @@
     <Compile Include="Receptionist\CheckinList.Designer.cs">
       <DependentUpon>CheckinList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Receptionist\MainFormRecep.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receptionist\MainFormRecep.Designer.cs">
+      <DependentUpon>MainFormRecep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Receptionist\PaymentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Receptionist\PaymentForm.Designer.cs">
+      <DependentUpon>PaymentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Receptionist\ReceptionistMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Receptionist\ReceptionistMainForm.Designer.cs">
+    <Compile Include="Receptionist\.Designer.cs">
       <DependentUpon>ReceptionistMainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Receptionist\SelectedRoomCard.cs" />
     <EmbeddedResource Include="Admin\MainForm.resx">
@@ -155,8 +186,11 @@
     <EmbeddedResource Include="Admin\ServiceManagementForm.resx">
       <DependentUpon>ServiceManagementForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Invoice.resx">
-      <DependentUpon>Invoice.cs</DependentUpon>
+    <EmbeddedResource Include="Admin\RoomManagementForm.resx">
+      <DependentUpon>RoomManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InvoiceForm.resx">
+      <DependentUpon>InvoiceForm.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -165,6 +199,9 @@
     </Compile>
     <EmbeddedResource Include="GuestCreateForm.resx">
       <DependentUpon>GuestCreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InvoiceList.resx">
+      <DependentUpon>InvoiceList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -184,11 +221,20 @@
     <EmbeddedResource Include="Receptionist\BookingList.resx">
       <DependentUpon>BookingList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Receptionist\BookingServiceForm.resx">
+      <DependentUpon>BookingServiceForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Receptionist\CheckinForm.resx">
       <DependentUpon>CheckinForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Receptionist\CheckinList.resx">
       <DependentUpon>CheckinList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receptionist\MainFormRecep.resx">
+      <DependentUpon>MainFormRecep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Receptionist\PaymentForm.resx">
+      <DependentUpon>PaymentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Receptionist\ReceptionistMainForm.resx">
       <DependentUpon>ReceptionistMainForm.cs</DependentUpon>

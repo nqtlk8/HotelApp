@@ -1,19 +1,13 @@
 ﻿using BusinessLogicLayer;
-using DataAccessLayer;
 using Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Admin
 {
-    public partial class ServiceManagementForm: Form
+    public partial class ServiceManagementForm : Form
     {
         public ServiceManagementForm()
         {
@@ -23,6 +17,7 @@ namespace PresentationLayer.Admin
             this.Dock = DockStyle.Fill;  // Co giãn toàn Panel
             LoadData();
         }
+        // Trong LoadData():
         private async void LoadData()
         {
             var data = await ServiceBLL.GetAllServices();
@@ -32,19 +27,39 @@ namespace PresentationLayer.Admin
             dgvServices.Columns["ServiceID"].Visible = false;
 
             // Cấu hình tiêu đề các cột
-            dgvServices.Columns["ServiceName"].HeaderText ="Dịch vụ";
+            dgvServices.Columns["ServiceName"].HeaderText = "Dịch vụ";
             dgvServices.Columns["Descrip"].HeaderText = "Mô tả";
             dgvServices.Columns["IsActive"].HeaderText = "Trạng thái";
 
+            // Xóa sự kiện trước để tránh gắn nhiều lần
+            dgvServices.CellFormatting -= DgvServices_CellFormatting;
+            dgvServices.CellFormatting += DgvServices_CellFormatting;
 
             // Không dùng Fill để có thể cuộn
             dgvServices.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvServices.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-
             dgvServices.ScrollBars = ScrollBars.Both;
         }
 
-        
+        // Đặt ra ngoài để tái sử dụng
+        private void DgvServices_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvServices.Columns[e.ColumnIndex].Name == "IsActive" && e.Value != null && e.Value != DBNull.Value)
+            {
+                try
+                {
+                    int isActive = Convert.ToInt32(e.Value); // an toàn hơn (int)e.Value
+                    e.Value = isActive == 1 ? "Hoạt động" : "Không hoạt động";
+                    e.FormattingApplied = true;
+                }
+                catch
+                {
+                    e.Value = "Không xác định";
+                    e.FormattingApplied = true;
+                }
+            }
+        }
+
         private void dgvPrices_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             using (SolidBrush b = new SolidBrush(dgvServices.RowHeadersDefaultCellStyle.ForeColor))
@@ -54,7 +69,7 @@ namespace PresentationLayer.Admin
                     e.RowBounds.Location.X + 10, e.RowBounds.Location.Y + 4);
             }
         }
-        
+
 
         private async void dgvServices_SelectionChanged(object sender, EventArgs e)
         {
@@ -64,10 +79,21 @@ namespace PresentationLayer.Admin
 
                 txtServiceName.Text = row.Cells["ServiceName"].Value?.ToString() ?? "";
                 txtDescrip.Text = row.Cells["Descrip"].Value?.ToString() ?? "";
-                txtIsActive.Text = row.Cells["IsActive"].Value?.ToString() ?? "";
+
+                var isActiveValue = row.Cells["IsActive"].Value;
+                if (isActiveValue != null && int.TryParse(isActiveValue.ToString(), out int isActive))
+                {
+                    cmbIsActive.SelectedValue = isActive;
+                }
+                else
+                {
+                    cmbIsActive.SelectedIndex = -1; // hoặc mặc định
+                }
+
                 LoadPriceData();
             }
-            
+
+
         }
 
         private async void btnAdd_Click(object sender, EventArgs e)
@@ -75,7 +101,6 @@ namespace PresentationLayer.Admin
             // Lấy dữ liệu từ TextBox
             string name = txtServiceName.Text.Trim();
             string descrip = txtDescrip.Text.Trim();
-            int isActive;
 
             // Kiểm tra hợp lệ đầu vào
             if (string.IsNullOrEmpty(name))
@@ -84,13 +109,16 @@ namespace PresentationLayer.Admin
                 return;
             }
 
-            if (!int.TryParse(txtIsActive.Text.Trim(), out isActive) || (isActive != 0 && isActive != 1))
+            if (cmbIsActive.SelectedItem == null)
             {
-                MessageBox.Show("⚠️ Trạng thái hoạt động chỉ được là 0 hoặc 1.");
+                MessageBox.Show("⚠️ Vui lòng chọn trạng thái hoạt động.");
                 return;
             }
 
-            
+            int isActive = (int)((KeyValuePair<int, string>)cmbIsActive.SelectedItem).Key;
+
+
+
             // Gọi hàm thêm dữ liệu
             bool result = await ServiceBLL.AddService(name, descrip, isActive);
 
@@ -106,12 +134,12 @@ namespace PresentationLayer.Admin
             }
         }
 
-    
+
         private void btnClear_Click(object sender, EventArgs e)
         {
             txtServiceName.Clear();
             txtDescrip.Clear();
-            txtIsActive.Clear();
+            cmbIsActive.SelectedIndex = -1;
 
             // Nếu muốn bỏ chọn dòng trên DataGridView luôn:
             dgvServices.ClearSelection();
@@ -125,13 +153,15 @@ namespace PresentationLayer.Admin
                 return;
             }
 
-            int isActive;
-
-            if (!int.TryParse(txtIsActive.Text.Trim(), out isActive) || (isActive != 0 && isActive != 1))
+            if (cmbIsActive.SelectedItem == null)
             {
-                MessageBox.Show("⚠️ Trạng thái hoạt động chỉ được là 0 hoặc 1.");
+                MessageBox.Show("⚠️ Vui lòng chọn trạng thái hoạt động.");
                 return;
             }
+
+            int isActive = (int)((KeyValuePair<int, string>)cmbIsActive.SelectedItem).Key;
+
+
 
             int serviceID = Convert.ToInt32(dgvServices.CurrentRow.Cells["ServiceID"].Value);  // Lấy ID từ DataGridView
             var service = new ServiceInfo
@@ -201,7 +231,7 @@ namespace PresentationLayer.Admin
             }
         }
 
-        
+
         private async void btnAddPrice_Click(object sender, EventArgs e)
         {
             try
@@ -255,7 +285,7 @@ namespace PresentationLayer.Admin
             dgvPrices.ClearSelection();
         }
 
-        
+
         private async void btnUpdatePrice_Click(object sender, EventArgs e)
         {
             try
@@ -309,5 +339,73 @@ namespace PresentationLayer.Admin
             }
         }
 
+        private void ServiceManagementForm_Load(object sender, EventArgs e)
+        {
+            var list = new List<KeyValuePair<int, string>>
+    {
+        new KeyValuePair<int, string>(1, "Hoạt động"),
+        new KeyValuePair<int, string>(0, "Không hoạt động")
+    };
+
+            cmbIsActive.DataSource = new BindingSource(list, null);
+            cmbIsActive.DisplayMember = "Value";
+            cmbIsActive.ValueMember = "Key";
+        }
+
+
+
+        private void TimKiemGanDungTrongDGV(string tuKhoa)
+        {
+            foreach (DataGridViewRow row in dgvServices.Rows)
+            {
+                row.Visible = false; // ẩn tất cả dòng trước
+
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    if (cell.Value != null &&
+                        cell.Value.ToString().IndexOf(tuKhoa, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        row.Visible = true; // hiển thị dòng có ô phù hợp
+                        break;
+                    }
+                }
+            }
+        }
+        
+
+        private void txtSearch_TextChanged_1(object sender, EventArgs e)
+        {
+            string tuKhoa = txtSearch.Text.Trim();
+            TimKiemGanDungTrongDGV(tuKhoa);
+        }
+        private void LocGiaTheoNgay(DateTime ngayChon)
+        {
+            foreach (DataGridViewRow row in dgvPrices.Rows)
+            {
+                // Lấy giá trị ngày bắt đầu và kết thúc
+                DateTime startDate = Convert.ToDateTime(row.Cells["StartDate"].Value);
+                DateTime endDate = Convert.ToDateTime(row.Cells["EndDate"].Value);
+
+                // Kiểm tra nếu ngày được chọn nằm trong khoảng [startDate, endDate]
+                if (ngayChon >= startDate && ngayChon <= endDate)
+                {
+                    row.Visible = true;
+                }
+                else
+                {
+                    row.Visible = false;
+                }
+            }
+        }
+
+        private void dateT_ValueChanged(object sender, EventArgs e)
+        {
+            LocGiaTheoNgay(dtpFilter.Value.Date);
+        }
+
+        private void dgvPrices_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

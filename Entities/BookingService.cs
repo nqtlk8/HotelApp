@@ -22,5 +22,9 @@ namespace Entities
             Quantity = quantity;
             UsedDate = usedDate;
         }
+        public BookingService()
+        {
+
+        }
     }
 }

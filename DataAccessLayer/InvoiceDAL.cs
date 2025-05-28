@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -108,6 +109,50 @@ namespace DataAccessLayer
                     }
                 }
             }
+        public static async Task<List<Invoice>> GetAllInvoicesAsync()
+        {
+            using (var connection = await DatabaseConnector.ConnectAsync())
+            {
+                if (connection == null) return null;
+
+                try
+                {
+                    string query = "SELECT * FROM Invoice";
+
+                    using (var command = new SQLiteCommand(query, connection))
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        List<Invoice> invoices = new List<Invoice>();
+                        while (await reader.ReadAsync())
+                        {
+                            Invoice invoice = new Invoice
+                            {
+                                InvoiceID = Convert.ToInt32(reader["InvoiceID"]),
+                                BookingID = Convert.ToInt32(reader["BookingID"]),
+                                InvoiceDate = Convert.ToDateTime(reader["InvoiceDate"]),
+                                RoomTotal = Convert.ToDouble(reader["RoomTotal"]),
+                                ServiceTotal = Convert.ToDouble(reader["ServiceTotal"]),
+                                VAT = Convert.ToDouble(reader["VAT"]),
+                                Surcharge = Convert.ToDouble(reader["Surcharge"]),
+                                TotalPayment = Convert.ToDouble(reader["TotalPayment"])
+                            };
+                            invoices.Add(invoice);
+                        }
+                        return invoices;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("❌ Lỗi khi lấy danh sách hóa đơn: " + ex.Message);
+                    return null;
+                }
+                finally
+                {
+                    DatabaseConnector.Close(connection);
+                }
+            }
         }
+
     }
+}
 

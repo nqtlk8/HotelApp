@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PresentationLayer.Admin;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,11 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PresentationLayer.Admin
+namespace PresentationLayer.Receptionist
 {
-    public partial class MainForm: Form
+    public partial class MainFormRecep: Form
     {
-        public MainForm()
+        public MainFormRecep()
         {
             InitializeComponent();
         }
@@ -27,38 +28,36 @@ namespace PresentationLayer.Admin
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
-           
             childForm.AutoScaleMode = AutoScaleMode.None;
+
             panelMain.Controls.Clear();
             panelMain.Controls.Add(childForm);
             childForm.BringToFront();
             childForm.Show();
         }
-
-        private void btnRoom_Click(object sender, EventArgs e)
+        private void btnBooking_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new RoomManagementForm());
+            OpenChildForm(new ReceptionistMainForm());
         }
 
-        private void btnService_Click(object sender, EventArgs e)
+        private void btnBookingService_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new ServiceManagementForm());
-        }
-
-        private void btnDashBoard_Click(object sender, EventArgs e)
-        {
-            DashboardForm adminForm = new DashboardForm();
-            adminForm.Show();
-        }
-
-        private void panelMenu_Paint(object sender, PaintEventArgs e)
-        {
-
+            OpenChildForm(new BookingServiceForm());
         }
 
         private void btnGuest_Click(object sender, EventArgs e)
         {
             OpenChildForm(new GuestCreateForm());
+        }
+
+        private void panelMain_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnPay_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new PaymentForm());
         }
 
         private void btnInvoice_Click(object sender, EventArgs e)

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer
 {
-    public partial class Invoice : Form
+    public partial class InvoiceForm : Form
     {
         private int invoiceID;  // Biến lưu ID hóa đơn đang xem
         public int bookingID;
@@ -46,7 +46,7 @@ namespace PresentationLayer
         public Label lblCheckOut;
         public Label lblCount;
         */
-        public Invoice(int selectedInvoiceId)
+        public InvoiceForm(int selectedInvoiceId)
         {
             InitializeComponent();     // Bắt buộc gọi đầu tiên, để tạo các control
 

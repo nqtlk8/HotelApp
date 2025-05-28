@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessLogicLayer;
 using Entities;
 
 namespace PresentationLayer.Receptionist
@@ -92,6 +94,7 @@ namespace PresentationLayer.Receptionist
 
             // Lấy BookingID từ dòng đầu tiên (giả sử BookingID nằm ở cột 0)
             int bookingID = int.Parse(selectedItem.SubItems[0].Text);
+            MessageBox.Show( $"{bookingID}");
 
             // Gọi hàm xử lý Checkout
             DataAccessLayer.CheckoutDAL.CheckoutAsync(bookingID).ContinueWith(task =>
@@ -105,8 +108,10 @@ namespace PresentationLayer.Receptionist
                 {
                     logger.Info($"Đã thực hiện checkout cho BookingID: {bookingID}");
                     MessageBox.Show("✅ Checkout thành công!");
+                    return;
                 }
             });
+
         }
 
         private void lstCheckin_DrawSubItem_1(object sender, DrawListViewSubItemEventArgs e)

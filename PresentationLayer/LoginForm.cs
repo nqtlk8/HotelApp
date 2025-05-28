@@ -8,7 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogicLayer;
+using DataAccessLayer;
+using Entities;
 using NLog;
+using PresentationLayer.Admin;
 using PresentationLayer.Receptionist;
 using Shared;
 
@@ -33,21 +36,37 @@ namespace PresentationLayer
                 return;
             }
 
-            bool isAuthenticated = await AuthBLL.Login(username, password);
+            // Lấy thông tin user từ database
+            User user = await AuthDAL.GetUser(username);
 
-            if (isAuthenticated)
+            if (user != null && user.Password == password)
             {
-                MessageBox.Show("Đăng nhập thành công");
-                CurrentUser.Username = username; // Lưu thông tin người dùng hiện tại
+                if (string.IsNullOrEmpty(user.Role))
+                {
+                    MessageBox.Show("⚠ Người dùng chưa được phân quyền, vui lòng liên hệ quản trị viên.");
+                    return;
+                }
 
-                this.DialogResult = DialogResult.OK;
-                // Gán username vào MDC để log ghi nhận
                 NLog.GlobalDiagnosticsContext.Set("Username", username);
-
                 logger.Info("Đăng nhập thành công");
 
-                NLog.LogManager.Flush(); // 🟢 đảm bảo ghi log xong trước khi đóng
-                this.Close(); // đóng form đăng nhập
+                Form mainForm = null;
+                switch (user.Role)
+                {
+                    case "admin":
+                        mainForm = new MainForm();
+                        break;
+                    case "Receptionist":
+                        mainForm = new MainFormRecep();
+                        break;
+                    default:
+                        MessageBox.Show("⚠ Vai trò không hợp lệ hoặc chưa được hỗ trợ.");
+                        return;
+                }
+
+                this.Hide();
+                mainForm.ShowDialog();
+                this.Close();
             }
             else
             {
@@ -55,4 +74,4 @@ namespace PresentationLayer
             }
         }
     }
-}
+    }

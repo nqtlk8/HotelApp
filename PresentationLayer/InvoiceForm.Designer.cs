@@ -1,6 +1,6 @@
 ﻿namespace PresentationLayer
 {
-    partial class Invoice
+    partial class InvoiceForm
     {
         /// <summary>
         /// Required designer variable.
